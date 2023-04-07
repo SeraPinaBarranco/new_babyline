@@ -1,6 +1,8 @@
-<button id="boton-hamburguesa">
-        <span>&#9776;</span>
-</button>
+<div class="div-burguer">
+    <button id="boton-hamburguesa">
+            <span>&#9776;</span>
+    </button>
+</div>
 <section class="sidebar">
         <aside>
             <nav id="menu-hamburguesa">
@@ -18,8 +20,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <!-- va a vista/registrar.php -->
-                            <li class="active"><a href="vistas/registrar.php"><i class="fa fa-circle-o fa-lg"></i>&nbsp;Registrar</a></li>
-                            <li><a href="index.php?pag=buscar"><i class="fa fa-circle-o fa-lg"></i>Buscar</a></li>
+                            <li class="active"><a href="registrar.php"><i class="fa fa-circle-o fa-lg"></i>&nbsp;Registrar</a></li>
+                            <li><a href="buscar.php"><i class="fa fa-circle-o fa-lg"></i>Buscar</a></li>
                         </ul>
                     </li>
 
