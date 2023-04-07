@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .sidebar{
+    position: relative;
+    z-index: 1;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  #menu-hamburguesa {
+    display: none;
+    background-color: #222d32;
+    width: fit-content;
+    text-align: center;
+    padding-right: 5vw;
+  }
+
+  #menu-hamburguesa ul li {
+    width: fit-content;
+    padding: 15px 0;
+  }
+  #menu-hamburguesa ul li a {
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+  }
+
+  #boton-hamburguesa {
+    background-color: #3c8dbc;
+    color: #fff;
+    font-size: 20px;
+    font-family: sans-serif;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .content-wrapper{
+    width: 100%;
+    margin: 0 auto;
+    top: 20vh;
+    left: 0.5vw;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .img-gestion-almacenes{
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .main-footer{
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+    font-size: small;
+  }
