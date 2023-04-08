@@ -5,10 +5,14 @@
     <?php include "./uis/head.php" ?>
     <link rel="stylesheet" href="./styles/menu_lateral.css">
     <link rel="stylesheet" href="./styles/style_registrar.css">
-    <script src="./controller/buscar_productos_controller.js" defer></script>
+    <script type="module" src="./controller/buscar_productos_controller.js" defer></script>
 
     <!-- DATA TABLES -->
     <link rel="stylesheet" href="./plugins/datatables/data_tables.css" />
+
+    <!-- TABULATOR -->
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
     <title>Buscar productos</title>
 </head>
@@ -33,7 +37,7 @@
             </form>
         </div>
 
-        <div class="div_tabla mt-5">
+        <!-- <div class="div_tabla mt-5">
             <table id="myTable" class="display" style="font-size: 0.7em;">
                 <thead>
                     <tr>
@@ -45,7 +49,7 @@
                         <th>Precio Compra</th>
                         <th>Precio Venta</th>
                         <th></th>
-                        
+
                     </tr>
                 </thead>
 
@@ -73,12 +77,15 @@
                 </tbody>
 
             </table>
-            
-        </div>
+
+        </div> -->
 
 
     </div>
 
+    <div class="mt-5">
+        <div id="example-table"></div>
+    </div>
 
 </body>
 
@@ -92,6 +99,8 @@
         }
     });
 </script>
+
+
 <script src="./plugins/datatables/data_tables.js"></script>
 
 </html>

@@ -64,7 +64,7 @@ class producto extends PDO{
 
         $stm->execute([':codigo_barra' => "$search%",':nombre' =>"$search%",':codigo_interno' =>"$search%"]);
 
-        $data = $stm->fetchAll();
+        $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
         //json_encode($data);
         // while($fila = $stm->fetch()){
@@ -72,7 +72,7 @@ class producto extends PDO{
         // }
        
         
-        return $data[0] ;
+        return $data ;
     }
 
 
