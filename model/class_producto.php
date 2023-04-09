@@ -2,24 +2,26 @@
 header("Content-Type: application/json");
 include_once "./db.php";
 
-class producto extends PDO{
+class producto extends PDO
+{
     private $db;
 
     public $res, $codigo_barra, $codigo_barra2, $codigo_interno, $codigo_interno2, $nombre_producto, $fabricante, $cantidad, $precio_compra, $precio_venta, $buscar, $id_producto, $cantidad_e, $acabo;
-    public function __construct(PDO $ddbb){
+    public function __construct(PDO $ddbb)
+    {
         $this->db = $ddbb;
     }
 
-    public function registrar(array $a):int
+    public function registrar(array $a): int
     {
         $query_check = "SELECT * FROM producto WHERE codigo_barra = ?";
         $stm = $this->db->prepare($query_check);
         $stm->execute([$a[0]]);
         $filas = $stm->rowCount();
 
-        if($filas > 0){            
+        if ($filas > 0) {
             return -1;
-        }else{
+        } else {
 
             $query = "INSERT INTO  producto(
                 codigo_barra      ,
@@ -56,13 +58,47 @@ class producto extends PDO{
         }
     }
 
+
+    public function actualiar(array $a): int
+    {
+        $query = "UPDATE producto 
+
+                    SET codigo_barra=       ?,
+                        codigo_interno=     ?,
+                        nombre=             ?,
+                        fabricante=         ?,
+                        cantidad_existente= ?,
+                        precio_compra=      ?,
+                        precio_venta=       ?,
+                        ubicacion=          ? 
+
+                        WHERE id_producto = ?";
+
+        $stm = $this->db->prepare($query);
+
+        $stm->execute([
+            
+             $a[1],
+             $a[2],
+             $a[3],
+             $a[4],
+             intval($a[5]),
+             $a[6],
+             $a[7],
+             $a[8],
+             $a[0],
+        ]);
+
+        return $stm->rowCount();
+    }
+
     public function consultar(string $search)
     {
         $query = "SELECT * FROM producto WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
         //$query = "SELECT * FROM producto";
         $stm = $this->db->prepare($query);
 
-        $stm->execute([':codigo_barra' => "$search%",':nombre' =>"$search%",':codigo_interno' =>"$search%"]);
+        $stm->execute([':codigo_barra' => "$search%", ':nombre' => "$search%", ':codigo_interno' => "$search%"]);
 
         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 
@@ -70,13 +106,16 @@ class producto extends PDO{
         // while($fila = $stm->fetch()){
         //     array_push($fila);
         // }
-       
-        
-        return $data ;
+
+
+        return $data;
     }
-
-
 }
+
+    
+
+
+
 
 
 
@@ -116,5 +155,3 @@ class producto extends PDO{
             
         }
         $html .= '</tbody>';*/
-
-?>
