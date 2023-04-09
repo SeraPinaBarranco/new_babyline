@@ -1,8 +1,14 @@
-let printIcon = function (_cell, _formatterParams, _onRendered) {
+let updateIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fas fa-edit"></i>`;
 };
 
+let deleteIcom = function (_cell, _formatterParams, _onRendered) {
+  return `<i class="fa-solid fa-delete-left" style="color:red"></i>`;
+};
+
+
 let table2 = new Tabulator("#example-table", {
+  printRowRange: "all",
   pagination: "local",
   paginationSize: 15,
   paginationSizeSelector: [25, 45, 60, 80],
@@ -92,10 +98,10 @@ let table2 = new Tabulator("#example-table", {
       },
     },
     {
-      title: "Id",
+      title: "Editar",
       field: "id_producto",
       hozAlign: "center",
-      formatter: printIcon,
+      formatter: updateIcom,
       cellClick: (_e, cell) => {
         //console.log(cell._cell.element.innerHTML)
         //cell._cell.element.innerHTML = '<p>ss</p>'
@@ -104,20 +110,31 @@ let table2 = new Tabulator("#example-table", {
         let entradas = Object.values(cell.getRow().getData());
 
         editarValoresTabla(entradas);
+        cell._cell.element.innerHTML = `<i class="fas fa-edit"></i>`
       },
     },
+    {
+      title: "Borrar",
+      field: "id_producto",
+      hozAlign: "center",
+      formatter: deleteIcom,
+      cellClick: cellClick_DeleteButton,
+    },
+    
   ],
 });
 
+//! Funcion de eliminar fila
+function cellClick_DeleteButton(e, cell){
+  //TODO llama a eliminar producto
+  console.log(cell.getRow().getData().id_producto);
+  borraValoresTabla(cell.getRow().getData().id_producto) 
+  cell.getRow().delete()
+  
+}
+
 let form = document.forms[0];
 
-window.addEventListener("load", (_event) => {
-  console.log("page is fully loaded");
-});
-
-// let table = new DataTable("#myTable", {
-//   // options
-// });
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -155,38 +172,8 @@ function buscarProducto() {
     });
 }
 
-// function tabulator(tabledata) {
-//   let table2 = new Tabulator("#example-table", {
-//     //height: 205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-
-//     data: tabledata, //assign data to table
-//     progressiveLoad: "load", //enable progressive loading
-//     progressiveLoadDelay: 200,
-//     layout: "fitColumns", //fit columns to width of table (optional)
-//     columns: [
-//       //Define Table Columns
-//       {
-//         title: "Nombre",
-//         field: "nombre",
-//         cellClick: function (e, column) {
-//           //e - the click event object
-//           //column - column component
-//           console.log(e);
-//         },
-//       },
-//       { title: "Fabricante", field: "fabricante" },
-//       { title: "Cantidad", field: "cantidad_existente" },
-//       { title: "Codigo Barra", field: "codigo_barra" },
-//       { title: "Codigo Interno", field: "codigo_interno" },
-//       { title: "Precio Compra", field: "precio_compra" },
-//       { title: "Precio Venta", field: "precio_venta" },
-//       { title: "Ubicacion", field: "ubicacion" },
-//     ],
-//   });
-// }
 
 //! Edita los valores de la tabla
-
 function editarValoresTabla(datos) {
   //URL de la peticion
   console.log(datos);
@@ -196,6 +183,39 @@ function editarValoresTabla(datos) {
   let configFetch = {
     method: "POST",
     body: `datos=${datos}`,
+    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+  //Ejecutar la promesa que devuelve la peticion
+  promesa
+    .then((res) => res.text())
+    .then((_datos) => {
+      if (_datos == 1 ) {
+        Swal.fire({
+          title: 'Editado!',
+          text: 'Producto editado',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+          
+        })
+      }
+      
+    });
+}
+
+//! Borra una los valores de la BBDD
+function borraValoresTabla(id) {
+  //URL de la peticion
+  console.log(id);
+  let url = "./model/class_eliminar_producto.php";
+
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `datos=${id}`,
     //headers: { "Content-Type": "application/x-www-form-urlencoded" },
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };

@@ -92,6 +92,17 @@ class producto extends PDO
         return $stm->rowCount();
     }
 
+    public function eliminar(string $id):int{
+        $query = "DELETE FROM producto WHERE id_producto = ?";
+
+        $stm = $this->db->prepare($query);
+
+        $stm->execute([$id]);
+
+        return $stm->rowCount();
+       
+    }
+
     public function consultar(string $search)
     {
         $query = "SELECT * FROM producto WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
