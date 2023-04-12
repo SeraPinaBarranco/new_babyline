@@ -1,3 +1,5 @@
+let orange = "orange"
+
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fas fa-edit"></i>`;
 };
@@ -87,15 +89,43 @@ let table2 = new Tabulator("#example-table", {
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
+    // {
+    //   title: "Ubicacion",
+    //   field: "ubicacion",
+    //   editor: "input",
+    //   cellEdited: (cell) => {
+    //     //console.log(cell._cell.row.cells[8].element.innerHTML)
+    //     cell._cell.row.cells[8].element.innerHTML =
+    //       '<i class="fas fa-edit" style="color:green"></i>';
+    //   },
+    // },
     {
+
       title: "Ubicacion",
-      field: "ubicacion",
-      editor: "input",
+      field: "id_ubicacion",
+      editor: "list",
       cellEdited: (cell) => {
-        //console.log(cell._cell.row.cells[8].element.innerHTML)
+        console.log(cell._cell)
         cell._cell.row.cells[8].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
+      editorParams:{
+        // itemFormatter: (label,value, item, element)=>{
+        //   //return "<strong>" + label + " </strong><br/><div>" + item.subtitle + "</div>" : ""
+        //   return `<strong> ${label}</strong><br/><div>${value}</div>`
+        // },
+        
+        //values: ["red", "green", "blue"],
+        valuesLookupField:(cell, filterTerm)=>{
+          return [
+            {label: 'id_ubicacion',
+            value: 'id_ubicacion'}
+          ]
+        },
+        valuesURL : "./model/class_buscar_ubicacion.php",
+        placeholderLoading:"Cargando ubicaciones...",
+        
+        }
     },
     {
       title: "Editar",
