@@ -1,13 +1,19 @@
-let orange = "orange"
+let frm_modal = document.getElementById("frm_modal");
+let btn_modal = document.getElementsByClassName("btn_modal");
+let actualizar = document.querySelector("#actualizar");
+let id_p = "";
 
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fas fa-edit"></i>`;
 };
 
+let ubicacionIcon = function (_cell, _formatterParams, _onRendered) {
+  return `<i class="fa-solid fa-boxes-stacked" data-bs-toggle="modal" data-bs-target="#myModal"></i>`;
+};
+
 let deleteIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fa-solid fa-delete-left" style="color:red"></i>`;
 };
-
 
 let table2 = new Tabulator("#example-table", {
   printRowRange: "all",
@@ -89,44 +95,18 @@ let table2 = new Tabulator("#example-table", {
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
-    // {
-    //   title: "Ubicacion",
-    //   field: "ubicacion",
-    //   editor: "input",
-    //   cellEdited: (cell) => {
-    //     //console.log(cell._cell.row.cells[8].element.innerHTML)
-    //     cell._cell.row.cells[8].element.innerHTML =
-    //       '<i class="fas fa-edit" style="color:green"></i>';
-    //   },
-    // },
     {
-
-      title: "Ubicacion",
-      field: "id_ubicacion",
-      editor: "list",
-      cellEdited: (cell) => {
-        console.log(cell._cell)
-        cell._cell.row.cells[8].element.innerHTML =
-          '<i class="fas fa-edit" style="color:green"></i>';
+      title: "Editar Ubicacion",
+      field: "id_producto",
+      hozAlign: "center",
+      formatter: ubicacionIcon,
+      cellClick: (_e, cell) => {
+        console.log(cell._cell.value);
+        id_p = cell._cell.value;
+        cargarModal();
       },
-      editorParams:{
-        // itemFormatter: (label,value, item, element)=>{
-        //   //return "<strong>" + label + " </strong><br/><div>" + item.subtitle + "</div>" : ""
-        //   return `<strong> ${label}</strong><br/><div>${value}</div>`
-        // },
-        
-        //values: ["red", "green", "blue"],
-        valuesLookupField:(cell, filterTerm)=>{
-          return [
-            {label: 'id_ubicacion',
-            value: 'id_ubicacion'}
-          ]
-        },
-        valuesURL : "./model/class_buscar_ubicacion.php",
-        placeholderLoading:"Cargando ubicaciones...",
-        
-        }
     },
+
     {
       title: "Editar",
       field: "id_producto",
@@ -140,7 +120,7 @@ let table2 = new Tabulator("#example-table", {
         let entradas = Object.values(cell.getRow().getData());
 
         editarValoresTabla(entradas);
-        cell._cell.element.innerHTML = `<i class="fas fa-edit"></i>`
+        cell._cell.element.innerHTML = `<i class="fas fa-edit"></i>`;
       },
     },
     {
@@ -150,21 +130,18 @@ let table2 = new Tabulator("#example-table", {
       formatter: deleteIcom,
       cellClick: cellClick_DeleteButton,
     },
-    
   ],
 });
 
 //! Funcion de eliminar fila
-function cellClick_DeleteButton(e, cell){
+function cellClick_DeleteButton(e, cell) {
   //TODO llama a eliminar producto
   console.log(cell.getRow().getData().id_producto);
-  borraValoresTabla(cell.getRow().getData().id_producto) 
-  cell.getRow().delete()
-  
+  borraValoresTabla(cell.getRow().getData().id_producto);
+  cell.getRow().delete();
 }
 
 let form = document.forms[0];
-
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -202,7 +179,6 @@ function buscarProducto() {
     });
 }
 
-
 //! Edita los valores de la tabla
 function editarValoresTabla(datos) {
   //URL de la peticion
@@ -223,23 +199,21 @@ function editarValoresTabla(datos) {
   promesa
     .then((res) => res.text())
     .then((_datos) => {
-      if (_datos == 1 ) {
+      if (_datos == 1) {
         Swal.fire({
-          title: 'Editado!',
-          text: 'Producto editado',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-          
-        })
+          title: "Editado!",
+          text: "Producto editado",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
       }
-      
     });
 }
 
 //! Borra una los valores de la BBDD
 function borraValoresTabla(id) {
   //URL de la peticion
-  console.log(id);
+  //console.log(id);
   let url = "./model/class_eliminar_producto.php";
 
   //configurar la peticion. AQUI CONFIGURO LA PETICION
@@ -259,3 +233,65 @@ function borraValoresTabla(id) {
       console.log(_datos);
     });
 }
+
+/** //! Cargar el modal de editar ubicacion */
+let sel_ubicacion = document.querySelector("#select_ubicacion");
+function cargarModal() {
+  let m = document.getElementsByClassName("modal");
+  sel_ubicacion.innerHTML = "";
+
+  //TODO llamar a las ubicaciones
+  let url = "./model/class_buscar_ubicacion.php";
+
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: ``,
+    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+  let option = "";
+  //Ejecutar la promesa que devuelve la peticion
+  promesa
+    .then((res) => res.json())
+    .then((_datos) => {
+      //console.log(_datos);
+
+      _datos.forEach((element) => {
+        option += `<option value="${element.id_ubicacion}">Fila: ${element.fila} - estanteria: ${element.estanteria} </option>`;
+      });
+
+      // Cargar las ubicaciones en el listado
+    })
+    .finally(() => (sel_ubicacion.innerHTML = option));
+}
+
+actualizar.addEventListener("click", () => {
+  //Llamar a actualizar producto para pasarle el id de la ubicacion
+  //TODO llamar a las ubicaciones
+  let url = "./model/class_actualizar_producto.php";
+
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_producto=${id_p}&id_ubicacion=${sel_ubicacion.value}`,
+    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+  let option = "";
+  //Ejecutar la promesa que devuelve la peticion
+  promesa
+    .then((res) => res.text())
+    .then((_datos) => {
+      console.log(_datos);
+
+      
+      
+    });
+});
