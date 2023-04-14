@@ -25,7 +25,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="index.php?pag=alta"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Salida</span></a></li>
+                    <li><a href="./salida.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Salida</span></a></li>
 
 
                     <li class="treeview">

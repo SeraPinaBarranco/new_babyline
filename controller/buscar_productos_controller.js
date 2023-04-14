@@ -13,8 +13,12 @@ let ubicacionIcon = function (_cell, _formatterParams, _onRendered) {
 };
 
 let deleteIcom = function (_cell, _formatterParams, _onRendered) {
-  return `<i class="fa-solid fa-delete-left" style="color:red"></i>`;
+  return `<i class="fa-solid fa-delete-left" style="color:red"></i>`
 };
+
+let salidaIcon = function(_cell, _formatterParams, _onRendered){
+  return `<i class="fa-solid fa-box-archive" data-bs-toggle="modal" data-bs-target="#myModalSalida"></i>`;
+}
 
 // ! Tabla de resultados TABULATOR
 let table2 = new Tabulator("#example-table", {
@@ -115,6 +119,20 @@ let table2 = new Tabulator("#example-table", {
       cellClick: (_e, cell) => {
         nombre_producto= cell._cell.row.cells[0].value;
         id_p = cell._cell.value;
+        cargarModal();
+      },
+    },
+
+    {
+      title: "Dar Salida",
+      field: "id_producto",
+      hozAlign: "center",
+      formatter: salidaIcon,
+      cellClick: (_e, cell) => {
+        //nombre_producto= cell._cell.row.cells[0].value;
+        id_p = cell._cell.value; // ID DEL PRODUCTO
+        
+        //TODO cargar un modal para dar salida
         cargarModal();
       },
     },
@@ -283,8 +301,7 @@ function cargarModal() {
 }
 
 actualizar.addEventListener("click", () => {
-  //Llamar a actualizar producto para pasarle el id de la ubicacion
-  //TODO llamar a las ubicaciones
+  //Llamar a actualizar producto para pasarle el id de la ubicacion 
   let url = "./model/class_actualizar_producto.php";
   console.log(id_p + " " + sel_ubicacion.value)
   
