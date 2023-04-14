@@ -133,7 +133,7 @@ let table2 = new Tabulator("#example-table", {
         id_p = cell._cell.value; // ID DEL PRODUCTO
         
         //TODO cargar un modal para dar salida
-        cargarModal();
+        //cargarModal();
       },
     },
 

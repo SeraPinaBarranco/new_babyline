@@ -65,6 +65,10 @@
 
                 <div class="modal-body">
                     <p id="parrafo-modal">Dar salida al producto:</p>
+                    <div class="mt-3">
+                        <input type="number" class="form-control" value="1" id="cantidad_salida">
+                    </div>
+                    
                     
                 </div>
 
