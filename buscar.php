@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <p id="parrafo-modal">Dar salida al producto:</p>
+                    <p id="parrafo-modal-salida"></p>
                     <div class="mt-3">
                         <input type="number" class="form-control" value="1" id="cantidad_salida">
                     </div>
@@ -74,7 +74,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="actualizar">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="dar_salida">Dar Salida</button>
                 </div>
             </div>
         </div>

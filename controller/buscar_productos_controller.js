@@ -3,6 +3,8 @@ let btn_modal = document.getElementsByClassName("btn_modal");
 let actualizar = document.querySelector("#actualizar");
 let id_p = "";
 let nombre_producto = ""
+let btn_actualizar = document.querySelector('#dar_salida')
+let parrafo_modal_salida = document.querySelector('#parrafo-modal-salida')
 
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fas fa-edit"></i>`;
@@ -37,7 +39,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -47,7 +49,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -57,7 +59,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -67,7 +69,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -77,7 +79,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -87,7 +89,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -97,7 +99,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[8].element.innerHTML =
+        cell._cell.row.cells[10].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -132,7 +134,11 @@ let table2 = new Tabulator("#example-table", {
         //nombre_producto= cell._cell.row.cells[0].value;
         id_p = cell._cell.value; // ID DEL PRODUCTO
         
-        //TODO cargar un modal para dar salida
+        //TODO poner en el modal el nombre del producto a dar salida
+        nombre_producto =  cell._cell.row.data.nombre
+
+        parrafo_modal_salida.innerHTML = `Dar salida al producto:<br> <b>${nombre_producto} - ${cell._cell.row.data.codigo_barra} - ${cell._cell.row.data.id_producto}</b>`
+        
         //cargarModal();
       },
     },
@@ -165,7 +171,7 @@ let table2 = new Tabulator("#example-table", {
 
 //! Funcion de eliminar fila
 function cellClick_DeleteButton(e, cell) {
-  //TODO llama a eliminar producto
+  //! Llama a eliminar producto
   console.log(cell.getRow().getData().id_producto);
   borraValoresTabla(cell.getRow().getData().id_producto);
   cell.getRow().delete();
@@ -270,7 +276,7 @@ function cargarModal() {
   let m = document.getElementsByClassName("modal");
   sel_ubicacion.innerHTML = "";
 
-  //TODO llamar a las ubicaciones
+  // ! Llamar a las ubicaciones
   let url = "./model/class_buscar_ubicacion.php";
 
   //configurar la peticion. AQUI CONFIGURO LA PETICION
@@ -300,6 +306,7 @@ function cargarModal() {
     .finally(() => (sel_ubicacion.innerHTML = option));
 }
 
+//! Actualizar producto
 actualizar.addEventListener("click", () => {
   //Llamar a actualizar producto para pasarle el id de la ubicacion 
   let url = "./model/class_actualizar_producto.php";
@@ -339,3 +346,43 @@ actualizar.addEventListener("click", () => {
       }
     })
 });
+
+//TODO Actualizar cantidad
+btn_actualizar.addEventListener('click', ()=>{
+  let url = "./model/class_Actualizar_cantidad.php";
+  let cantidad_salida = document.querySelector('#cantidad_salida')
+    
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_producto=${id_p}&cantidad=${cantidad_salida.value}`,
+    
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  }
+
+  //CONFIGURAR LA PETICION
+  let promesa = fetch(url, configFetch);
+
+  promesa
+    .then((res) => res.text())
+    .then((_datos) => {
+      if(_datos == 1){
+        Swal.fire({
+          title: 'Actualizado!',
+          text: 'Cantidad restada',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+          timer: 1500
+        }).then(()=>buscarProducto())
+      }else{
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error al actualizar la cantidad',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer:1500
+        })
+      }
+    })
+  
+})
