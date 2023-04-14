@@ -11,7 +11,7 @@ if (empty($_POST['id_producto'] || empty($_POST['id_ubicacion']))) {
     
     $data = $stm->rowCount();
 
-
+    
 
 }    
 

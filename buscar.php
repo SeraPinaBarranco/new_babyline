@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <p id="parrafo-modal">Listado de ubicaciones del almacen</p>
                     <div class="dropdown">                        
                         <select class="form-select" aria-label="Default select example" id="select_ubicacion">
                             <option selected>Open this select menu</option>
@@ -44,8 +44,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="actualizar">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="actualizar">Guardar</button>
                 </div>
             </div>
         </div>

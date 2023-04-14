@@ -105,8 +105,12 @@ class producto extends PDO
 
     public function consultar(string $search)
     {
-        $query = "SELECT * FROM producto WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
-        //$query = "SELECT * FROM producto";
+        //$query = "SELECT * FROM producto WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
+
+        $query = "SELECT producto.*,  concat(ubicacion.fila, ' - ', ubicacion.estanteria) as ubicacion_almacen FROM producto 
+                    LEFT OUTER JOIN ubicacion
+	                on producto.ubicacion = ubicacion.id_ubicacion
+                    WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
         $stm = $this->db->prepare($query);
 
         $stm->execute([':codigo_barra' => "$search%", ':nombre' => "$search%", ':codigo_interno' => "$search%"]);
