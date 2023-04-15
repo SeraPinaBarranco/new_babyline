@@ -126,7 +126,7 @@ let table2 = new Tabulator("#example-table", {
     },
 
     {
-      title: "Dar Salida",
+      title: "Dar Entrada/Salida",
       field: "id_producto",
       hozAlign: "center",
       formatter: salidaIcon,
@@ -327,6 +327,7 @@ actualizar.addEventListener("click", () => {
   promesa
     .then((res) => res.text())
     .then((_datos) => {
+      console.log(_datos + " *")
       if(_datos == 1){
         Swal.fire({
           title: 'Actualizado!',

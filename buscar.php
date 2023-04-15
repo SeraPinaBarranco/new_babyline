@@ -14,6 +14,8 @@
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
+    <link rel="stylesheet" href="./styles/buscar_styles.css">
+
     <title>Buscar productos</title>
 </head>
 
@@ -59,14 +61,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Dar Salida a producto</h5>
+                    <h5 class="modal-title">Dar Entrada/Salida a producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="container">
+                    <span>Los valores <b>negativos generan salida</b><br> y los <b>positivos generan entradas</b></span>
+
+                </div>    
 
                 <div class="modal-body">
                     <p id="parrafo-modal-salida"></p>
                     <div class="mt-3">
-                        <input type="number" class="form-control" value="1" id="cantidad_salida">
+                        <input type="number" class="form-control" value="-1" id="cantidad_salida">
                     </div>
                     
                     
