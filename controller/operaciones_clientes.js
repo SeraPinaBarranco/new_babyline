@@ -15,21 +15,21 @@ const  requestText = (uri, campos) => {
 
     let datos = ""
     //Ejecutar la promesa que devuelve la peticion
-    promesa
+    return promesa
         .then(res => res.text())
-        .then(_datos => {
-                datos = _datos
+        // .then(_datos => {
+        //         datos = _datos
                 
-                //mostarMensaje(_datos)
+        //         //mostarMensaje(_datos)
 
-            }
-        )
+        //     }
+        // )
 
-    return datos
+     
 
 }
 
-function mostarMensaje(res) {
+const mostarMensaje = (res) => {
   if (res == -1) {
     Swal.fire({
       title: "Error!",
@@ -47,4 +47,4 @@ function mostarMensaje(res) {
   }
 }
 
-export { requestText };
+export { requestText, mostarMensaje };

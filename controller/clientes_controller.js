@@ -1,4 +1,4 @@
-import { requestText } from "./operaciones_clientes.js"
+import { requestText, mostarMensaje } from "./operaciones_clientes.js"
 
 let form = document.forms[0]
 let btnRegistrar = document.querySelector('#btnRegistrar')
@@ -15,9 +15,18 @@ form.addEventListener('submit', async (e)=>{
     let campos = `cliente=${inputCliente.value}`
 
     
-    const res = requestText(uri,campos) 
+    const res = requestText(uri,campos)
 
-    console.log(res)
+    res.then((data)=>{
+        if(data == 1){
+            mostarMensaje(data)
+            form.reset()
+        }else{
+            mostarMensaje(data)
+        }
+    })
+        
+
 
       
     
