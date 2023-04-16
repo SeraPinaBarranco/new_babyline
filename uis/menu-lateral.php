@@ -41,6 +41,21 @@
                         </ul>
                     </li>
 
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Clientes</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right fa-lg"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="./registrar_cliente.php"><img src="./assets/images/iconos/cliente.png" alt="clientes" class="iconos" ></img>Registrar</a></li>
+                            <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Editar</a></li>
+                            <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Eliminar</a></li>
+                            <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Listar</a></li>
+                        </ul>
+                    </li>
+                    
 
                     <li><a href="index.php?pag=listdb"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Registrar BD Remota</span></a></li>
 
@@ -56,3 +71,5 @@
             </nav>
         </aside>
     </section>
+
+    

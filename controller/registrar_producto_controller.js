@@ -29,9 +29,9 @@ codigo.forEach(element => {
 });
 
 
-window.addEventListener("load", (event) => {
-    console.log("page is fully loaded");
-});
+// window.addEventListener("load", (event) => {
+//     console.log("page is fully loaded");
+// });
 
 form.addEventListener('submit', (event)=>{
     event.preventDefault()
