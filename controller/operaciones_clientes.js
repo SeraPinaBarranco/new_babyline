@@ -13,26 +13,11 @@ const  requestText = (uri, campos) => {
     //mandar la peticion
     let promesa = fetch(uri, configFetch);
 
-    let datos = ""
     //Ejecutar la promesa que devuelve la peticion
-    return promesa
-        // .then(res => {
-        //     if(res.status == 500)return -1
-        //     //console.log(res.status)
-        //     res.text()
-        //   }
-        // )
-        // .then(_datos => {
-        //         datos = _datos
-                
-        //         //mostarMensaje(_datos)
-
-        //     }
-        // )
-
-     
-
+    return promesa       
 }
+
+
 
 const mostarMensaje = (res) => {
   if (res <= 0) {

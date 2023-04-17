@@ -52,7 +52,7 @@
                             <li><a href="./registrar_cliente.php"><img src="./assets/images/iconos/cliente.png" alt="clientes" class="iconos" ></img>Registrar</a></li>
                             <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Editar</a></li>
                             <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Eliminar</a></li>
-                            <li><a href=""><i class="fa fa-circle-o fa-lg"></i>Listar</a></li>
+                            <li><a href="./listar_clientes.php"><i class="fa fa-circle-o fa-lg"></i>Listar</a></li>
                         </ul>
                     </li>
                     
