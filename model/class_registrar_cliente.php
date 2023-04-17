@@ -6,6 +6,7 @@
     //var_dump($_POST);
     
     if(!empty($_POST['cliente'])){
+        
         $cliente = htmlspecialchars($_POST['cliente']);
         
         $query = "INSERT INTO tiendas (nombre) VALUES (?)";
@@ -15,6 +16,7 @@
         $stm->execute([$cliente]);
     
         $data = $stm->rowCount();
+        
     }else {
         $data = -1;
     }

@@ -16,7 +16,12 @@ const  requestText = (uri, campos) => {
     let datos = ""
     //Ejecutar la promesa que devuelve la peticion
     return promesa
-        .then(res => res.text())
+        // .then(res => {
+        //     if(res.status == 500)return -1
+        //     //console.log(res.status)
+        //     res.text()
+        //   }
+        // )
         // .then(_datos => {
         //         datos = _datos
                 
@@ -30,7 +35,7 @@ const  requestText = (uri, campos) => {
 }
 
 const mostarMensaje = (res) => {
-  if (res == -1) {
+  if (res <= 0) {
     Swal.fire({
       title: "Error!",
       text: "Algo fué mal",
