@@ -18,6 +18,7 @@ form.addEventListener('submit', async (e)=>{
     const res = requestText(uri,campos)
 
     res.then((data)=>{
+        console.log(data)
         if(data == 1){
             mostarMensaje(data)
             form.reset()
