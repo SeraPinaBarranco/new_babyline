@@ -35,7 +35,7 @@
 
                 <div class="modal-body">
                     <p id="parrafo-modal">Listado de ubicaciones del almacen</p>
-                    <div class="dropdown">                        
+                    <div class="dropdown">
                         <select class="form-select" aria-label="Default select example" id="select_ubicacion">
                             <option selected>Open this select menu</option>
                             <option value="1">One</option>
@@ -67,15 +67,15 @@
                 <div class="container">
                     <span>Los valores <b>negativos generan salida</b><br> y los <b>positivos generan entradas</b></span>
 
-                </div>    
+                </div>
 
                 <div class="modal-body">
                     <p id="parrafo-modal-salida"></p>
                     <div class="mt-3">
                         <input type="number" class="form-control" value="-1" id="cantidad_salida">
                     </div>
-                    
-                    
+
+
                 </div>
 
                 <div class="modal-footer">
@@ -86,6 +86,20 @@
         </div>
     </div>
     <!-- END MODAL -->
+
+    <!-- MODAL REGISTRAR PRECIO A CLIENTE -->
+    <div class="modal fade" id="myModalPrecios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="dar_salida">Dar Salida</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN MODAL -->
 
 
 
@@ -100,55 +114,11 @@
                     <input type="text" id="buscar" name="buscar" class="form-control mb-3 buscar" value="" placeholder="Buscar Por Nombre - Codigo Barra - Codigo Interno" />
 
                     <div>
-                        <input type="submit" name="buscar" value="Buscar" class="btn btn-success" id="buscar" />
+                        <input type="submit" name="btn_buscar" value="Buscar" class="btn btn-success" id="btn_buscar" />
                     </div>
 
             </form>
         </div>
-
-        <!-- <div class="div_tabla mt-5">
-            <table id="myTable" class="display" style="font-size: 0.7em;">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Fabricante</th>
-                        <th>Cantidad</th>
-                        <th>Codigo Barra</th>
-                        <th>Codigo Interno</th>
-                        <th>Precio Compra</th>
-                        <th>Precio Venta</th>
-                        <th></th>
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 1</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-
-            </table>
-
-        </div> -->
-
 
     </div>
 

@@ -18,7 +18,7 @@ const  requestText = (uri, campos) => {
 }
 
 
-
+  
 const mostarMensaje = (res) => {
   if (res <= 0) {
     Swal.fire({
@@ -36,5 +36,6 @@ const mostarMensaje = (res) => {
     });
   }
 }
+
 
 export { requestText, mostarMensaje };

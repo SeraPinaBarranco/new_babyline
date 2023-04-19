@@ -6,6 +6,7 @@ let nombre_producto = ""
 let btn_actualizar = document.querySelector('#dar_salida')
 let parrafo_modal_salida = document.querySelector('#parrafo-modal-salida')
 
+//! BOTONES DE LA TABLA */
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fas fa-edit"></i>`;
 };
@@ -21,6 +22,12 @@ let deleteIcom = function (_cell, _formatterParams, _onRendered) {
 let salidaIcon = function(_cell, _formatterParams, _onRendered){
   return `<i class="fa-solid fa-box-archive" data-bs-toggle="modal" data-bs-target="#myModalSalida"></i>`;
 }
+
+let asignarPrecio = (_cell, _formatterParams, _onRendered)=>{
+  return `<i class="fas fa-hand-holding-usd" data-bs-toggle="modal" data-bs-target="#myModalPrecios"></i>`
+
+}
+//! ------------------------ //
 
 // ! Tabla de resultados TABULATOR
 let table2 = new Tabulator("#example-table", {
@@ -126,6 +133,17 @@ let table2 = new Tabulator("#example-table", {
     },
 
     {
+      title: "Editar precios",
+      field: "id_producto",
+      hozAlign: "center",
+      formatter: asignarPrecio,
+      cellClick: (_e, cell) => {
+        console.log(cell._cell.value)
+        id_p = cell._cell.value
+      },
+    },
+
+    {
       title: "Dar Entrada/Salida",
       field: "id_producto",
       hozAlign: "center",
@@ -200,7 +218,7 @@ function buscarProducto() {
   //configurar la peticion. AQUI CONFIGURO LA PETICION
   let configFetch = {
     method: "POST",
-    body: `buscar=${valor}`,
+    body: `buscar=${ valor}`,
     //headers: { "Content-Type": "application/x-www-form-urlencoded" },
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };

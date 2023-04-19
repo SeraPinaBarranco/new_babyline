@@ -21,7 +21,11 @@ form.addEventListener('submit', async (e)=>{
         .then((res) => (res.text())
         .then((data) => {
             console.log(data)            
-            mostarMensaje(data)            
+            mostarMensaje(data) 
+            form.reset()
+            setTimeout(() => {
+                window.location.href = "./listar_clientes.php"                          
+            }, 2000); 
         })    
     )
         
