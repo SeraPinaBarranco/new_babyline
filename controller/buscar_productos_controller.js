@@ -1,3 +1,5 @@
+import { requestText } from "./operaciones_clientes.js";
+
 let frm_modal = document.getElementById("frm_modal");
 let btn_modal = document.getElementsByClassName("btn_modal");
 let actualizar = document.querySelector("#actualizar");
@@ -113,7 +115,8 @@ let table2 = new Tabulator("#example-table", {
     {
       title: "Ubicacion",
       field: "ubicacion_almacen",
-      editor: "input",
+      formatter:"plaintext",
+      //editor: "input",
       // cellEdited: (cell) => {
       //   //console.log(cell._cell.row.cells[8].element.innerHTML)
       //   cell._cell.row.cells[8].element.innerHTML =
@@ -138,8 +141,9 @@ let table2 = new Tabulator("#example-table", {
       hozAlign: "center",
       formatter: asignarPrecio,
       cellClick: (_e, cell) => {
-        console.log(cell._cell.value)
+        nombre_producto= cell._cell.row.cells[0].value;
         id_p = cell._cell.value
+        cargarModalClientes()
       },
     },
 
@@ -405,3 +409,20 @@ btn_actualizar.addEventListener('click', ()=>{
     })
   
 })
+
+function cargarModalClientes(){
+  let textoH5Modal = document.querySelector('#titulo_modal_cliente')
+  textoH5Modal.innerHTML = `Registrar precio diferente para:</br> ${nombre_producto}`
+
+  let uri = "./model/class_buscar_clientes.php";
+  let campos = `cliente=${""}`;
+
+  const res = requestText(uri, campos);
+
+  res
+    .then((res) => res.json())
+    .then((datos) => {      
+      console.log(datos)
+      //TODO Llenar listado con el select
+    });
+}
