@@ -4,9 +4,10 @@ let frm_modal = document.getElementById("frm_modal");
 let btn_modal = document.getElementsByClassName("btn_modal");
 let actualizar = document.querySelector("#actualizar");
 let id_p = "";
-let nombre_producto = ""
-let btn_actualizar = document.querySelector('#dar_salida')
-let parrafo_modal_salida = document.querySelector('#parrafo-modal-salida')
+let nombre_producto = "";
+let btn_actualizar = document.querySelector("#dar_salida");
+let parrafo_modal_salida = document.querySelector("#parrafo-modal-salida");
+let btnGuardarPrecio = document.querySelector("#btnGuardarPrecio");
 
 //! BOTONES DE LA TABLA */
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
@@ -18,17 +19,16 @@ let ubicacionIcon = function (_cell, _formatterParams, _onRendered) {
 };
 
 let deleteIcom = function (_cell, _formatterParams, _onRendered) {
-  return `<i class="fa-solid fa-delete-left" style="color:red"></i>`
+  return `<i class="fa-solid fa-delete-left" style="color:red"></i>`;
 };
 
-let salidaIcon = function(_cell, _formatterParams, _onRendered){
+let salidaIcon = function (_cell, _formatterParams, _onRendered) {
   return `<i class="fa-solid fa-box-archive" data-bs-toggle="modal" data-bs-target="#myModalSalida"></i>`;
-}
+};
 
-let asignarPrecio = (_cell, _formatterParams, _onRendered)=>{
-  return `<i class="fas fa-hand-holding-usd" data-bs-toggle="modal" data-bs-target="#myModalPrecios"></i>`
-
-}
+let asignarPrecio = (_cell, _formatterParams, _onRendered) => {
+  return `<i class="fas fa-hand-holding-usd" data-bs-toggle="modal" data-bs-target="#myModalPrecios"></i>`;
+};
 //! ------------------------ //
 
 // ! Tabla de resultados TABULATOR
@@ -115,7 +115,7 @@ let table2 = new Tabulator("#example-table", {
     {
       title: "Ubicacion",
       field: "ubicacion_almacen",
-      formatter:"plaintext",
+      formatter: "plaintext",
       //editor: "input",
       // cellEdited: (cell) => {
       //   //console.log(cell._cell.row.cells[8].element.innerHTML)
@@ -129,7 +129,7 @@ let table2 = new Tabulator("#example-table", {
       hozAlign: "center",
       formatter: ubicacionIcon,
       cellClick: (_e, cell) => {
-        nombre_producto= cell._cell.row.cells[0].value;
+        nombre_producto = cell._cell.row.cells[0].value;
         id_p = cell._cell.value;
         cargarModal();
       },
@@ -141,9 +141,9 @@ let table2 = new Tabulator("#example-table", {
       hozAlign: "center",
       formatter: asignarPrecio,
       cellClick: (_e, cell) => {
-        nombre_producto= cell._cell.row.cells[0].value;
-        id_p = cell._cell.value
-        cargarModalClientes()
+        nombre_producto = cell._cell.row.cells[0].value;
+        id_p = cell._cell.value;
+        cargarModalClientes();
       },
     },
 
@@ -155,12 +155,12 @@ let table2 = new Tabulator("#example-table", {
       cellClick: (_e, cell) => {
         //nombre_producto= cell._cell.row.cells[0].value;
         id_p = cell._cell.value; // ID DEL PRODUCTO
-        
-        //TODO poner en el modal el nombre del producto a dar salida
-        nombre_producto =  cell._cell.row.data.nombre
 
-        parrafo_modal_salida.innerHTML = `Dar salida al producto:<br> <b>${nombre_producto} - ${cell._cell.row.data.codigo_barra} - ${cell._cell.row.data.id_producto}</b>`
-        
+        //TODO poner en el modal el nombre del producto a dar salida
+        nombre_producto = cell._cell.row.data.nombre;
+
+        parrafo_modal_salida.innerHTML = `Dar salida al producto:<br> <b>${nombre_producto} - ${cell._cell.row.data.codigo_barra} - ${cell._cell.row.data.id_producto}</b>`;
+
         //cargarModal();
       },
     },
@@ -222,7 +222,7 @@ function buscarProducto() {
   //configurar la peticion. AQUI CONFIGURO LA PETICION
   let configFetch = {
     method: "POST",
-    body: `buscar=${ valor}`,
+    body: `buscar=${valor}`,
     //headers: { "Content-Type": "application/x-www-form-urlencoded" },
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };
@@ -232,7 +232,7 @@ function buscarProducto() {
   //Ejecutar la promesa que devuelve la peticion
   promesa
     .then((res) => res.json())
-    .then((datos) => {      
+    .then((datos) => {
       table2.setData(datos);
     });
 }
@@ -316,8 +316,9 @@ function cargarModal() {
   promesa
     .then((res) => res.json())
     .then((_datos) => {
-      
-      document.querySelector('#parrafo-modal').innerHTML = `Listado de ubicaciones del almacen para el producto<br> <b>${nombre_producto}</b>`
+      document.querySelector(
+        "#parrafo-modal"
+      ).innerHTML = `Listado de ubicaciones del almacen para el producto<br> <b>${nombre_producto}</b>`;
 
       _datos.forEach((element) => {
         option += `<option value="${element.id_ubicacion}">Fila: ${element.fila} - estanteria: ${element.estanteria} </option>`;
@@ -330,10 +331,10 @@ function cargarModal() {
 
 //! Actualizar producto
 actualizar.addEventListener("click", () => {
-  //Llamar a actualizar producto para pasarle el id de la ubicacion 
+  //Llamar a actualizar producto para pasarle el id de la ubicacion
   let url = "./model/class_actualizar_producto.php";
-  console.log(id_p + " " + sel_ubicacion.value)
-  
+  console.log(id_p + " " + sel_ubicacion.value);
+
   //configurar la peticion. AQUI CONFIGURO LA PETICION
   let configFetch = {
     method: "POST",
@@ -349,39 +350,39 @@ actualizar.addEventListener("click", () => {
   promesa
     .then((res) => res.text())
     .then((_datos) => {
-      console.log(_datos + " *")
-      if(_datos == 1){
+      console.log(_datos + " *");
+      if (_datos == 1) {
         Swal.fire({
-          title: 'Actualizado!',
-          text: 'Ubicación actualizada',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-          timer: 1500
-        }).then(()=>buscarProducto())
-      }else{
+          title: "Actualizado!",
+          text: "Ubicación actualizada",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        }).then(() => buscarProducto());
+      } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'Eroor al actualizar la ubicación',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer:1500
-        })
+          title: "Error!",
+          text: "Eroor al actualizar la ubicación",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        });
       }
-    })
+    });
 });
 
 //TODO Actualizar cantidad
-btn_actualizar.addEventListener('click', ()=>{
+btn_actualizar.addEventListener("click", () => {
   let url = "./model/class_Actualizar_cantidad.php";
-  let cantidad_salida = document.querySelector('#cantidad_salida')
-    
+  let cantidad_salida = document.querySelector("#cantidad_salida");
+
   //configurar la peticion. AQUI CONFIGURO LA PETICION
   let configFetch = {
     method: "POST",
     body: `id_producto=${id_p}&cantidad=${cantidad_salida.value}`,
-    
+
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  }
+  };
 
   //CONFIGURAR LA PETICION
   let promesa = fetch(url, configFetch);
@@ -389,30 +390,31 @@ btn_actualizar.addEventListener('click', ()=>{
   promesa
     .then((res) => res.text())
     .then((_datos) => {
-      if(_datos == 1){
+      if (_datos == 1) {
         Swal.fire({
-          title: 'Actualizado!',
-          text: 'Cantidad restada',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-          timer: 1500
-        }).then(()=>buscarProducto())
-      }else{
+          title: "Actualizado!",
+          text: "Cantidad restada",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        }).then(() => buscarProducto());
+      } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'Error al actualizar la cantidad',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer:1500
-        })
+          title: "Error!",
+          text: "Error al actualizar la cantidad",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        });
       }
-    })
-  
-})
+    });
+});
 
-function cargarModalClientes(){
-  let textoH5Modal = document.querySelector('#titulo_modal_cliente')
-  textoH5Modal.innerHTML = `Registrar precio diferente para:</br> ${nombre_producto}`
+function cargarModalClientes() {
+  let textoH5Modal = document.querySelector("#titulo_modal_cliente");
+  textoH5Modal.innerHTML = `Registrar precio diferente para:</br> ${nombre_producto}-${id_p}`;
+  let selClientes = document.querySelector("#selectClientes");
+  let opciones = "";
 
   let uri = "./model/class_buscar_clientes.php";
   let campos = `cliente=${""}`;
@@ -421,8 +423,57 @@ function cargarModalClientes(){
 
   res
     .then((res) => res.json())
-    .then((datos) => {      
-      console.log(datos)
+    .then((datos) => {
+      console.log(datos);
+
+      datos.forEach((element) => {
+        opciones += `<option value="${element.id_tienda}">${element.nombre}</option>`;
+      });
+      selClientes.innerHTML = opciones;
       //TODO Llenar listado con el select
     });
 }
+
+btnGuardarPrecio.addEventListener("click", () => {
+  let precio_diferente = document.querySelector("#precioTienda");
+  let selClientes = document.querySelector("#selectClientes").value;
+
+  let url = "./model/class_registrar_precio_diferente.php";
+  //configurar la peticion. AQUI CONFIGURO LA PETICION
+  let configFetch = {
+    method: "POST",
+    body: `id_producto=${id_p}&precioTienda=${precio_diferente.value}&id_cliente=${selClientes}`,
+    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+  console.log(configFetch.body)
+  //mandar la peticion
+  let promesa = fetch(url, configFetch);
+  let option = "";
+  //Ejecutar la promesa que devuelve la peticion
+  promesa
+    .then((res) => res.text())
+    .then((_datos) => {
+      console.log(_datos);
+      if (_datos == 1) {
+        Swal.fire({
+          title: "Actualizado!",
+          text: "Precio registrado",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        }).then(() => buscarProducto());
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Error al registrar el precio",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        });
+      }
+    
+    });
+});
+
+//TODO Buscar producto
