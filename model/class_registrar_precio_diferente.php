@@ -25,7 +25,8 @@
     $stm->execute([$id_producto,$id_cliente]);
 
     $data = $stm->rowCount();
-    
+
+    //Si devuelve 0 Inserta y si devuelve 1 actualiza    
     if($data == 0){
         
         $query = "INSERT INTO productos_tienda (id_tienda, id_producto, precio_producto) 
@@ -34,6 +35,15 @@
         $stm = $pdo->prepare($query);
                 
         $stm->execute([$id_cliente,$id_producto,$precioTienda]);
+    
+        $data = $stm->rowCount();
+    }else{
+        $query = "UPDATE productos_tienda SET precio_producto= ? 
+            WHERE id_tienda = ? AND id_producto = ?";
+
+        $stm = $pdo->prepare($query);
+                
+        $stm->execute([$precioTienda, $id_cliente,$id_producto]);
     
         $data = $stm->rowCount();
     }

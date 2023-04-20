@@ -159,6 +159,5 @@
 </script>
 
 
-<script src="./plugins/datatables/data_tables.js"></script>
 
 </html>

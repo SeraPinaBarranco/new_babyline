@@ -103,7 +103,7 @@ let table2 = new Tabulator("#example-table", {
       },
     },
     {
-      title: "Precio Venta",
+      title: "Precio Genérico",
       field: "precio_venta",
       editor: "input",
       cellEdited: (cell) => {
