@@ -14,6 +14,9 @@
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
+    <!-- XLSX Scripts -->
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js" defer></script>
+
     <link rel="stylesheet" href="./styles/buscar_styles.css">
 
     <title>Buscar productos</title>
@@ -137,8 +140,14 @@
 
     </div>
 
+<!-- <div id="example-table"></div> -->
+
     <div class="container mt-5">
         <div id="example-table"></div>
+    </div>
+
+    <div>    
+        <button class="btn btn-success mt-3" id="download-xlsx">Download XLSX</button>    
     </div>
 
 </body>

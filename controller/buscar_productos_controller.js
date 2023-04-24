@@ -476,4 +476,9 @@ btnGuardarPrecio.addEventListener("click", () => {
     });
 });
 
+//! Exportar a Excel
+document.getElementById("download-xlsx").addEventListener("click", function(){
+  table2.download("xlsx", "data.xlsx", {sheetName:"My Data"});
+});
+
 //TODO Buscar producto
