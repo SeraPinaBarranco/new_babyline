@@ -142,7 +142,7 @@
 
 <!-- <div id="example-table"></div> -->
 
-    <div class="container mt-5">
+    <div class=" mt-5">
         <div id="example-table"></div>
     </div>
 

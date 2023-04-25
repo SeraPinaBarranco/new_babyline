@@ -61,7 +61,7 @@
 
                     <li><a href="index.php?pag=actualizar_todas"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Actualizar Webs</span></a></li>
 
-                    <li><a href="formatos/productos.php" target="_blank"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar</span></a></li>
+                    <li><a href="exportar.php" target="_blank"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar</span></a></li>
 
                     <li><a href="index.php?pag=importar"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Importar</span></a></li>
 
