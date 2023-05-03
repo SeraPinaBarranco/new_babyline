@@ -1,6 +1,6 @@
 import { requestText } from "./operaciones_clientes.js";
 
-let btnExportar = document.getElementById('btn_Exportar');
+let btnExportar = document.getElementById('btnExportar');
 
 btnExportar.addEventListener('click', () =>{
 
@@ -16,7 +16,7 @@ btnExportar.addEventListener('click', () =>{
     const res = requestText(uri, configFetch);
 
     res
-        .then((res) => res.text())
+        .then((res) => res.json())
         .then((_datos) => {
 
             console.log(_datos);
