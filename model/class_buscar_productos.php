@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 header("Content-Type: application/json");
 include_once("./db.php");
 include_once("./class_producto.php");
