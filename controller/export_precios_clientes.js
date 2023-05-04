@@ -11,7 +11,16 @@ let table2 = new Tabulator("#tabla", {
     columns: [
         {title: "Nombre",
         field: "Nombre_producto",
-        editor: "input",}
+        editor: "input",},
+
+        {title: "cliente1",
+        field: "cliente1",
+        editor: "input",},
+
+        {title: "cliente2",
+        field: "cliente2",
+        editor: "input",},
+        
     ]
 })
 
