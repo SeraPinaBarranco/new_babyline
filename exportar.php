@@ -25,6 +25,9 @@
         <button class="btn btn-primary" id="btnExportar">Exportar</button>
     </div>
     
+    <div class="mt-5">
+        <div id="tabla"></div>
+    </div>
 </body>
 
 <script>
