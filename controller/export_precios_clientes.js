@@ -67,9 +67,28 @@ function doExcel(){
             }
         }        
     }
-    console.log(productos)
+    //console.log(productos)
     table2.setData(productos)
-
+    generarColumnas()
 }
 
+//!Generador de cloumnas en base a JSON columna
+function generarColumnas(){
+    let col
+    let fila
+    let nColumnas = columna[0].columnas
 
+    /**
+     * {title: "Nombre",
+        field: "Nombre_producto",
+        editor: "input",}
+     */
+
+    for (let i = 0; i < nColumnas; i++) {
+       
+        fila = col['cliente' + i] 
+        
+    }
+
+    
+}
