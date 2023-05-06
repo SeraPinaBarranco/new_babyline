@@ -11,8 +11,12 @@ $producto = new producto($pdo);
 
 //echo $_POST['buscar'];
 
+if(!empty($_POST['buscar'])){
+    $res = $producto->consultar(  $_POST['buscar']);
 
-$res = $producto->consultar($_POST['buscar']);
+}else{
+    $res = $producto->consultar("");
+}
 
 //echo( gettype($res) );
 

@@ -10,33 +10,34 @@ class Obj{
     public $columna;
     public $productos;
     public $precios;
+    public $tiendas;
 }
 
 //Variable que almacena el nº de clientes para crear las columnas
 $columns = 0;   
 
-$query ="SELECT COUNT(tiendas.id_tienda) * 2 as columnas from tiendas";
+$query ="SELECT COUNT(tiendas.id_tienda) as columnas from tiendas";
 
 $stm = $pdo->prepare($query);
 $stm->execute();
 $columns = $stm->fetchAll(PDO::FETCH_ASSOC);
 
 
-$productos = "";
+// $productos = "";
 
-$query2 = "SELECT cantidad_existente as cantidad_exixtente, 
-                    codigo_barra as Codigo_barra,
-                    codigo_interno as Codigo_interno,
-                    fabricante as Fabricante,
-                    id_producto as ID_producto,
-                    nombre as Nombre_producto,
-                    precio_compra as Precio_compra,
-                    precio_venta as Precio_de_venta
-            FROM producto LIMIT 100";
+// $query2 = "SELECT cantidad_existente as cantidad_exixtente, 
+//                     codigo_barra as Codigo_barra,
+//                     codigo_interno as Codigo_interno,
+//                     fabricante as Fabricante,
+//                     id_producto as ID_producto,
+//                     nombre as Nombre_producto,
+//                     precio_compra as Precio_compra,
+//                     precio_venta as Precio_de_venta
+//             FROM producto";
 
-$stm = $pdo->prepare($query2);
-$stm->execute();
-$productos  = $stm->fetchAll(PDO::FETCH_ASSOC);
+// $stm = $pdo->prepare($query2);
+// $stm->execute();
+// $productos  = $stm->fetchAll(PDO::FETCH_ASSOC);
 
 
 $precios = "";
@@ -48,12 +49,21 @@ $stm = $pdo->prepare($query);
 $stm->execute();
 $precios  = $stm->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+$tiendas = "";
+
+$query = "SELECT count(DISTINCT(pt.id_tienda)) as tiendas FROM productos_tienda pt";
+$stm = $pdo->prepare($query);
+$stm->execute();
+$tiendas  = $stm->fetchAll(PDO::FETCH_ASSOC);
+
 $obj = new Obj();
 
 $obj->columna = $columns;
-$obj->productos = $productos;
+//$obj->productos = $productos;
 $obj->precios = $precios;
-
+$obj->tiendas = $tiendas;
 //print_r($productos);
 
 echo json_encode($obj);   

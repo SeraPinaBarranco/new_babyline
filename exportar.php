@@ -14,8 +14,7 @@
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
-    <script type="module" src="./controller/export_precios_clientes.js"></script>
-
+   
     <title>Document</title>
 </head>
 <body>
@@ -28,6 +27,9 @@
     <div class="mt-5">
         <div id="tabla"></div>
     </div>
+
+    <script type="module" src="./controller/export_precios_clientes.js"></script>
+
 </body>
 
 <script>
