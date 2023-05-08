@@ -40,27 +40,15 @@ let table2 = new Tabulator("#tabla", {
     paginationSizeSelector: [25, 45, 60, 80],
     movableColumns: true,
     paginationCounter: "rows",
-    //columns: [
-        // {title: "Nombre",
-        // field: "Nombre_producto",
-        // editor: "input",},
-
-        // {title: "cliente1",
-        // field: "cliente1",
-        // editor: "input",},
-
-        // {title: "precio_producto1",
-        // field: "precio_producto1",
-        // editor: "input",},
-
-        // {title: "cliente2",
-        // field: "cliente2",
-        // editor: "input",},
-        
-        // {title: "precio_producto2",
-        // field: "precio_producto2",
-        // editor: "input",},
-    //]
+    rowFormatter: function(row) {
+        var cell = row.getCell(6);
+        console.log(row._row.cells)
+        // if (cell.getValue() < 0) {
+        //     cell.getElement().style.color = "red";
+        // }
+    
+    }   
+    
 })
 
 function llenarTablas(){
@@ -69,7 +57,7 @@ function llenarTablas(){
     let configFetch = {
     method: "POST",
     body: ``,
-    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     };
 
@@ -114,10 +102,10 @@ function generarColumnas(){
         editor: "input",})  
     table2.addColumn({title: "Cod. Barras",
         field: "codigo_barra",
-        editor: "input",})  
+        editor: "input", headerFilter:true})  
     table2.addColumn({title: "Cod. Interno",
         field: "codigo_interno",
-        editor: "input",})  
+        editor: "input",headerFilter:true})  
     table2.addColumn({title: "Precio Compra",
         field: "precio_compra",
         editor: "input",})  
