@@ -22,6 +22,7 @@
                             <!-- va a vista/registrar.php -->
                             <li class="active"><a href="registrar.php"><i class="fa fa-circle-o fa-lg"></i>&nbsp;Registrar</a></li>
                             <li><a href="buscar.php"><i class="fa fa-circle-o fa-lg"></i>Buscar</a></li>
+                            <li><a href="importar.php"><i class="fa fa-circle-o fa-lg"></i>Importar tablas (categoria)</a></li>
                         </ul>
                     </li>
 

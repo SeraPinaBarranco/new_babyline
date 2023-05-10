@@ -1,29 +1,33 @@
-<?php
-require "./vendor/autoload.php";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <?php include "./uis/head.php" ?>
+    <link rel="stylesheet" href="./styles/menu_lateral.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php include "./uis/menu-lateral.php" ?>
+    <section>
+        <div class="container mt-3">
+            <form action="./model/importar_categoria.php">
+                <input class="btn btn-success" type="submit" value="Importar categorias">
+            </form>
+        </div>
+    </section>
+    
 
-
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-$nombreArchivo = "./datos/categorias.xlsx";
-$documento = IOFactory::load($nombreArchivo);
-
-$totalHojas = $documento->getSheetCount();
-
-$hojaActual = $documento->getSheet(0);
-$numeroFilas = $hojaActual->getHighestDataRow();
-$letra = $hojaActual->getHighestDataColumn();
-
-
-//var_dump($numeroFilas) ;
-// for ($i=0; $i < $totalHojas; $i++) { 
-//     # code...
-// }
-
-for ($nFila=1; $nFila <= $numeroFilas ; $nFila++) { 
-    //for ($col=1; $col <= $letra; $col++) { 
-        $valor = $hojaActual->getCell([$nFila, 1]);
-        echo $valor;
-    //}
-}
-
-?>
+    <script>
+    document.getElementById("boton-hamburguesa").addEventListener("click", function() {
+        var menu = document.getElementById("menu-hamburguesa");
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    });
+</script>
+</body>
+</html>
