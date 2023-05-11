@@ -12,8 +12,13 @@
     <?php include "./uis/menu-lateral.php" ?>
     <section>
         <div class="container mt-3">
-            <form action="./model/importar_categoria.php">
-                <input class="btn btn-success" type="submit" value="Importar categorias">
+            <form action="./model/importaciones.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="archivo">
+                
+                <input class="btn btn-success" type="submit" name="importar-productos" value="Importar productos">
+                
+                <input class="btn btn-success" type="submit" name="importar-categorias" value="Importar categorias">
+
             </form>
         </div>
     </section>
