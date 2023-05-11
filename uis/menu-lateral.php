@@ -64,7 +64,7 @@
 
                     <li><a href="exportar.php" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar</span></a></li>
 
-                    <li><a href="index.php?pag=importar"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Importar</span></a></li>
+                    <li><a href="importar.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Importar</span></a></li>
 
                     <li><a href="index.php?pag=cargandoa3erp" onclick="return confirm('Seguro que desea actualizar el programar de Gestion?'); "><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;<span>Actualizar a3erp</span></a></li>
                 </ul>
