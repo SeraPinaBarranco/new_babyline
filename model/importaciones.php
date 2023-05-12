@@ -65,16 +65,18 @@ function importar_productos(string $archivo)
 
     $rows = 0;
 
+    //TODO valorar si hacer una actualizacion 
+
     for ($nFila = 2; $nFila <= $numeroFilas; $nFila++) {
-        $valor1 = $hojaActual->getCell([1, $nFila]);
-        $valor2 = $hojaActual->getCell([2,  $nFila]);
+        $valor1  = $hojaActual ->getCell([1, $nFila]);
+        $valor2  = $hojaActual ->getCell([2,  $nFila]);
         $valor3  = $hojaActual->getCell([3, $nFila]);
-        $valor4 = $hojaActual->getCell([4, $nFila]);
-        $valor5 = $hojaActual->getCell([5, $nFila]);
-        $valor6 = $hojaActual->getCell([6, $nFila]);
-        $valor7 = $hojaActual->getCell([7, $nFila]);
-        $valor8 = $hojaActual->getCell([8, $nFila]);
-        $valor9 = $hojaActual->getCell([9, $nFila]);
+        $valor4  = $hojaActual ->getCell([4, $nFila]);
+        $valor5  = $hojaActual ->getCell([5, $nFila]);
+        $valor6  = $hojaActual ->getCell([6, $nFila]);
+        $valor7  = $hojaActual ->getCell([7, $nFila]);
+        $valor8  = $hojaActual ->getCell([8, $nFila]);
+        $valor9  = $hojaActual ->getCell([9, $nFila]);
         $valor10 = $hojaActual->getCell([10, $nFila]);
 
         $query = "INSERT INTO 

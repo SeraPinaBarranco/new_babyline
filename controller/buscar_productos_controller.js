@@ -41,6 +41,12 @@ let table2 = new Tabulator("#example-table", {
   paginationCounter: "rows",
   columns: [
     //Define Table Columns
+    {
+      title: "ID",
+      field: "id_producto",
+      visible: true,
+      
+    },
 
     {
       title: "Nombre",
@@ -127,6 +133,7 @@ let table2 = new Tabulator("#example-table", {
       title: "Editar Ubicacion",
       field: "id_producto",
       hozAlign: "center",
+      print: false,
       formatter: ubicacionIcon,
       cellClick: (_e, cell) => {
         nombre_producto = cell._cell.row.cells[0].value;
@@ -139,6 +146,7 @@ let table2 = new Tabulator("#example-table", {
       title: "Editar precios",
       field: "id_producto",
       hozAlign: "center",
+      print: false,
       formatter: asignarPrecio,
       cellClick: (_e, cell) => {
         nombre_producto = cell._cell.row.cells[0].value;
@@ -151,6 +159,7 @@ let table2 = new Tabulator("#example-table", {
       title: "Dar Entrada/Salida",
       field: "id_producto",
       hozAlign: "center",
+      print: false,
       formatter: salidaIcon,
       cellClick: (_e, cell) => {
         //nombre_producto= cell._cell.row.cells[0].value;
@@ -169,6 +178,7 @@ let table2 = new Tabulator("#example-table", {
       title: "Editar",
       field: "id_producto",
       hozAlign: "center",
+      print: false,
       formatter: updateIcom,
       cellClick: (_e, cell) => {
         //console.log(cell._cell.element.innerHTML)
@@ -478,7 +488,9 @@ btnGuardarPrecio.addEventListener("click", () => {
 
 //! Exportar a Excel
 document.getElementById("download-xlsx").addEventListener("click", function(){
-  table2.download("xlsx", "data.xlsx", {sheetName:"My Data"});
+  
+  console.log(table2);
+  //table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
 });
 
 //TODO Buscar producto
