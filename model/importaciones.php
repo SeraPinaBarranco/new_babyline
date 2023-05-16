@@ -52,7 +52,7 @@ if (!empty($_POST['importar-productos']) && !empty($archivo)) {
 
 
 
-
+//! La importación solo se realiza de los campos propios de la tabla
 function importar_productos(string $archivo)
 {
     //Obtener y cargar ruta y nombre del archivo a cargar
@@ -76,17 +76,18 @@ function importar_productos(string $archivo)
         $valor6  = $hojaActual ->getCell([6, $nFila]);
         $valor7  = $hojaActual ->getCell([7, $nFila]);
         $valor8  = $hojaActual ->getCell([8, $nFila]);
-        $valor9  = $hojaActual ->getCell([9, $nFila]);
-        $valor10 = $hojaActual->getCell([10, $nFila]);
+        //$valor9  = $hojaActual ->getCell([9, $nFila]);
+        //$valor10 = $hojaActual->getCell([10, $nFila]);
 
-        $query = "INSERT INTO 
-            producto2(id_producto, codigo_barra, codigo_interno, nombre, 
-            fabricante, cantidad_existente, precio_compra, precio_venta, 
-            ubicacion, categoria_id) 
-        VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $query= "UPDATE producto SET 
+                nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?,
+                precio_compra=?,precio_venta=?/*,ubicacion= ?*/
+                WHERE id_producto = ?";     
+
+        
         $stm = $GLOBALS['pdo']->prepare($query);
 
-        $stm->execute([$valor1, $valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, $valor9, $valor10]);
+        $stm->execute([ $valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
         $rows += $stm->rowCount();
     }
 }
