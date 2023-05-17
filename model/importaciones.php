@@ -15,7 +15,11 @@ if (!empty($_POST['importar-productos']) && !empty($archivo)) {
 } elseif (!empty($_POST['importar-categorias']) && !empty($archivo)) {
     //importar_categorias();
     subir_archivo($archivo, 'importar-categorias');
-} else {
+} elseif (!empty($_POST['importar-clientes']) && !empty($archivo)) {
+    subir_archivo($archivo, 'importar-clientes');
+} 
+
+else {
     echo "no";
 }
 

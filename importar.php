@@ -19,6 +19,8 @@
                 
                 <input class="btn btn-success" type="submit" name="importar-categorias" value="Importar categorias">
 
+                <input class="btn btn-success" type="submit" name="importar-clientes" value="Importar clientes">
+
             </form>
         </div>
     </section>

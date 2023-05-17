@@ -62,7 +62,9 @@
 
                     <li><a href="index.php?pag=actualizar_todas"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Actualizar Webs</span></a></li>
 
-                    <li><a href="exportar.php" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar</span></a></li>
+                    <li><a href="exportar.php" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar productos con precios</span></a></li>
+                    <li><a href="#" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar categorias</span></a></li>
+                    <li><a href="#" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar tiendas</span></a></li>
 
                     <li><a href="importar.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Importar</span></a></li>
 
