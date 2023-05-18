@@ -12,6 +12,7 @@ $query = "SELECT * from categoria";
 $stm = $pdo->prepare($query);
 $stm->execute();
 $columns = $stm->fetchAll(PDO::FETCH_ASSOC);
+//print_r($columns);
 
 $excel = new Spreadsheet();
 
@@ -20,16 +21,19 @@ $hojaActiva->setTitle("Categorias");
 
 $hojaActiva->setCellValue("A1", "id");
 $hojaActiva->setCellValue("B1", "nombre_categoria");
-$hojaActiva->setCellValue("C1", "id_prod");
+//$hojaActiva->setCellValue("C1", "id_prod");
 
 
 $fila = 2;
-foreach ($columns as $key => $value) {
-    //echo $columns[$key]["id"]. " - " . $columns[$key]["nombre_categoria"] . "<br>";
-    $hojaActiva->setCellValue("A".$fila, $columns[$key]["id"]);
-    $hojaActiva->setCellValue("B".$fila, $columns[$key]["nombre_categoria"]);
-    $hojaActiva->setCellValue("C".$fila, $columns[$key]["id_prod"]);
-    $fila++;
+if(count($columns)>0){
+
+    foreach ($columns as $key => $value) {
+        //echo $columns[$key]["id"]. " - " . $columns[$key]["nombre_categoria"] . "<br>";
+        $hojaActiva->setCellValue("A".$fila, $columns[$key]["id"]);
+        $hojaActiva->setCellValue("B".$fila, $columns[$key]["nombre_categoria"]);
+        //$hojaActiva->setCellValue("C".$fila, $columns[$key]["id_prod"]);
+        $fila++;
+    }
 }
 
 
