@@ -22,7 +22,7 @@
                             <!-- va a vista/registrar.php -->
                             <li class="active"><a href="registrar.php"><i class="fa fa-circle-o fa-lg"></i>&nbsp;Registrar</a></li>
                             <li><a href="buscar.php"><i class="fa fa-circle-o fa-lg"></i>Buscar</a></li>
-                            <li><a href="importar.php"><i class="fa fa-circle-o fa-lg"></i>Importar tablas (categoria)</a></li>
+                            <li><a href="importar.php"><i class="fa fa-circle-o fa-lg"></i>Importar tablas desde Excel</a></li>
                         </ul>
                     </li>
 
@@ -67,7 +67,7 @@
                     <li><a href="./model/exportar-tiendas.php" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar tiendas</span></a></li>
                     <!-- <li><a href="#" ><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Exportar tiendas</span></a></li> -->
 
-                    <li><a href="importar.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Importar</span></a></li>
+                    <li><a href="nueva-categoria.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Nueva Categoria</span></a></li>
 
                     <li><a href="index.php?pag=cargandoa3erp" onclick="return confirm('Seguro que desea actualizar el programar de Gestion?'); "><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;<span>Actualizar a3erp</span></a></li>
                 </ul>
