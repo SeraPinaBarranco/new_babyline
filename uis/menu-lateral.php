@@ -69,6 +69,8 @@
 
                     <li><a href="nueva-categoria.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>Nueva Categoria</span></a></li>
 
+                    <li><a href="./model/class_ropadecu.php"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;<span>ROPADECU</span></a></li>
+
                     <li><a href="index.php?pag=cargandoa3erp" onclick="return confirm('Seguro que desea actualizar el programar de Gestion?'); "><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;<span>Actualizar a3erp</span></a></li>
                 </ul>
 
