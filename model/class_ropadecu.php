@@ -9,6 +9,18 @@ $stm->execute();
 $data = $stm->fetchAll(PDO::FETCH_ASSOC);
 //print_r($data[0]['ip']);
 
-foreach ($data as $key => $value) {
-    print_r($data[$key]['ip']) ;
-}
+$ropacedecu = $data[3];
+
+extract($ropacedecu);
+
+
+$DNS = "mysql:host=" .$ip. ";dbname=". $db .";charset=utf8";
+
+$pdo = new PDO($DNS,$usuario, $clave);
+
+
+// foreach ($data as $key => $value) {
+//     print_r($data[$key]['ip']) ;
+// }
+
+
