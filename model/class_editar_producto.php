@@ -12,6 +12,8 @@ $datos = explode(",",$_POST["datos"]);
 
 $res = $producto->actualiar($datos);
 
+//TODO Una vez actualizado cargar datos a la tabla cambios
+
 echo $res;
 
 ?>

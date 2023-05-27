@@ -59,7 +59,7 @@ class producto extends PDO
     }
 
 
-    public function actualiar(array $a): int
+    public function actualiar(array $a)/*: int*/
     {
         $query = "UPDATE producto 
 
@@ -75,7 +75,7 @@ class producto extends PDO
                         WHERE id_producto = ?";
 
         $stm = $this->db->prepare($query);
-
+       
         $stm->execute([
             
              $a[1],
@@ -85,10 +85,10 @@ class producto extends PDO
              intval($a[5]),
              $a[6],
              $a[7],
-             intval($a[8]),
+             empty($a[8]) ? 9 : $a[8],
+             //empty($a) ? intval($a[8]) : 1,
              $a[0],
         ]);
-
         return $stm->rowCount();
     }
 

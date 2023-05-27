@@ -16,8 +16,10 @@ extract($ropacedecu);
 
 $DNS = "mysql:host=" .$ip. ";dbname=". $db .";charset=utf8";
 
-$pdo = new PDO($DNS,$usuario, $clave);
+$pdo = new PDO($DNS,$usuario, $clave) or die( "Error en la conexión");
 
+
+//TODO cada vez que se actualice o se grabe un producto en la base de datos hay que generar un registro en cambios
 
 // foreach ($data as $key => $value) {
 //     print_r($data[$key]['ip']) ;
