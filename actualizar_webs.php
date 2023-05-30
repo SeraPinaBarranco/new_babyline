@@ -13,37 +13,43 @@
 <body>
     <?php include "./uis/menu-lateral.php" ?>
     <section>
+        <form action="./model/actualiza_web.php" method="POST">
         <div class="container mt-3 d-flex flex-row justify-content-evenly">
 
-            <div class="card" style="width: 18rem;">
-                <img src="./imagenes/iconos/original-baby.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="./imagenes/iconos/original-baby.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                       
+                        <input class="btn btn-primary" type="submit" name="web" value="Actualizar original-baby">
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" style="width: 18rem;">
-                <img src="./imagenes/iconos/dulce-paseo.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card" style="width: 18rem;">
+                    <img src="./imagenes/iconos/dulce-paseo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                       
+                        <input class="btn btn-primary" type="submit" name="web" value="Actualizar dulce-paseo">
+                    </div>
                 </div>
-            </div>
 
-            <div class="card" style="width: 18rem;">
-                <img src="./imagenes/iconos/happy-way.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card" style="width: 18rem;">
+                    <img src="./imagenes/iconos/happy-way.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        
+                        <input class="btn btn-primary" type="submit" name="web" value="Actualizar happy-way">
+                    </div>
                 </div>
+                
+                
             </div>
-
-
-        </div>
+        </form>
     </section>
 
 

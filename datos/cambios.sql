@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2023 a las 13:35:10
+-- Tiempo de generación: 30-05-2023 a las 19:33:37
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -31,8 +31,8 @@ CREATE TABLE `cambios` (
   `model` varchar(64) NOT NULL,
   `ean` varchar(14) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(14,2) NOT NULL,
-  `fecha_cambio` datetime NOT NULL,
+  `price` decimal(15,4) NOT NULL,
+  `fecha_cambio` datetime DEFAULT NULL,
   `up_ropadecu` tinyint(1) DEFAULT NULL,
   `up_babyline` tinyint(1) DEFAULT NULL,
   `up_happy` tinyint(1) DEFAULT NULL
@@ -43,7 +43,7 @@ CREATE TABLE `cambios` (
 --
 
 INSERT INTO `cambios` (`model`, `ean`, `quantity`, `price`, `fecha_cambio`, `up_ropadecu`, `up_babyline`, `up_happy`) VALUES
-('111', '1112', 41, 545.00, '2023-05-30 12:31:52', 0, 0, 0);
+('111', '1112', 41, 545.0000, '2023-05-30 12:31:52', 0, 0, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
