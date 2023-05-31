@@ -20,7 +20,7 @@ echo $res;
 
 //! Carga datos a la tabla cambios
 function generarCambios($model, $ean, $quantity, $price, $pdo){
-    $query = "INSERT INTO cambios VALUES(?, ? , ?, ?, ?)";
+    $query = "INSERT INTO cambios VALUES(?, ? , ?, ?, ?, 0,0,0)";
     $fecha = new DateTime();
     $fecha_formateada = $fecha->format('Y-m-d H:i:s');
     print_r($fecha_formateada);

@@ -24,6 +24,8 @@ if (!empty($_POST['web'])) {
     if (str_contains($post, 'original-baby')) {
         
         // TODO Actualizar la web
+        //TODO 1º crear la consulta para llamar a todos los cambios que la web sea 0
+        //TODO 2° Recorrer la consulta para actualizar la web
 
         $web = "original-baby";
         if($pdo->query("CALL update_cambios_original ('111', '1112')")){
@@ -42,6 +44,6 @@ if (!empty($_POST['web'])) {
     
 }
 
-
+//TODO comprobar que todas las actualizaciones estan en 1 y si es asi borrar la tabla
 
 ?>

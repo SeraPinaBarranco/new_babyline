@@ -1,6 +1,8 @@
 <?php 
     header("Content-Type: application/json");
     include_once("./db.php");
+
+    
     $data = 0;
 
     //$id_cliente = $_POST['categoria'];

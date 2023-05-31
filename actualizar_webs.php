@@ -1,3 +1,38 @@
+<?php 
+include_once "./model/parametros.php";
+
+$pdo = new PDO($DNS,$USER, $PASS);
+
+//TODO Ver si hay cambios pendientes en la tabla CAMBIOS
+
+$stm = "";
+$baby = 0;
+$ropa = 0;
+$happy= 0;
+
+$query = "SELECT * FROM CAMBIOS where up_babyline = 0";
+
+$stm = $pdo->prepare($query);
+$stm->execute();
+$baby = $stm->rowCount();
+
+/*---------*/
+
+$query = "SELECT * FROM CAMBIOS where up_ropadecu = 0";
+
+$stm = $pdo->prepare($query);
+$stm->execute();
+$ropa = $stm->rowCount();
+
+/*---------*/
+
+$query = "SELECT * FROM CAMBIOS where up_happy = 0";
+
+$stm = $pdo->prepare($query);
+$stm->execute();
+$happy = $stm->rowCount();
+ ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,7 +56,8 @@
                     <img src="./imagenes/iconos/original-baby.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h6><span class="badge bg-danger">Cambios pendientes  <span class="badge bg-secondary"><?php echo $baby ?></span> </span></h6> 
+                        
                        
                         <input class="btn btn-primary" type="submit" name="web" value="Actualizar original-baby">
                     </div>
@@ -31,7 +67,8 @@
                     <img src="./imagenes/iconos/dulce-paseo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h6><span class="badge bg-danger">Cambios pendientes  <span class="badge bg-secondary"><?php echo $ropa ?></span></span></h6> 
+                        
                        
                         <input class="btn btn-primary" type="submit" name="web" value="Actualizar dulce-paseo">
                     </div>
@@ -41,7 +78,7 @@
                     <img src="./imagenes/iconos/happy-way.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h6><span class="badge bg-danger">Cambios pendientes  <span class="badge bg-secondary"> <?php echo $happy ?></span></span></h6> 
                         
                         <input class="btn btn-primary" type="submit" name="web" value="Actualizar happy-way">
                     </div>
