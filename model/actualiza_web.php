@@ -1,7 +1,7 @@
 <?php 
 /**Actualiza la web especifica ejecutando un procedimiento almacenado */
 
-header("Content-Type: application/json");
+//header("Content-Type: application/json");
 include_once("./db.php");
 
 
@@ -14,7 +14,7 @@ include_once("./db.php");
 //         # code...
 //         break;
 // }
-
+print_r($_POST);
 $web = "";
 
 if (!empty($_POST['web'])) {
@@ -28,7 +28,8 @@ if (!empty($_POST['web'])) {
         //TODO 2° Recorrer la consulta para actualizar la web
 
         $web = "original-baby";
-        if($pdo->query("CALL update_cambios_original ('111', '1112')")){
+        if($pdo->query("CALL update_cambios_babyline (" .$_POST['model']  .", " .$_POST['ean'] .")")){
+            
             echo "Babyline actualizado" ;
         }else{
             echo "Falló la creación del procedimiento almacenado: (" . $pdo->errorInfo() . ") " . $pdo->errorCode();
@@ -36,9 +37,22 @@ if (!empty($_POST['web'])) {
         
     }elseif (str_contains($post, 'dulce-paseo')) {
         $web = 'dulce-paseo';
-        echo $post;
+        $web = "original-baby";
+        if($pdo->query("CALL update_cambios_ropadecu (" .$_POST['model']  .", " .$_POST['ean'] .")")){
+            
+            echo "Ropadecu actualizado" ;
+        }else{
+            echo "Falló la creación del procedimiento almacenado: (" . $pdo->errorInfo() . ") " . $pdo->errorCode();
+        }
     }elseif(str_contains($post, 'happy-way')){
         $web = 'happy-way';
+        
+        if($pdo->query("CALL update_cambios_happy (" .$_POST['model']  .", " .$_POST['ean'] .")")){
+            
+            echo "Happy way actualizado" ;
+        }else{
+            echo "Falló la creación del procedimiento almacenado: (" . $pdo->errorInfo() . ") " . $pdo->errorCode();
+        }
         echo $post;
     }
     
