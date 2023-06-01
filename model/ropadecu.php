@@ -7,5 +7,5 @@ $BBDD   =  "ropadecu_oc32journal3";
 
 $DNS = "mysql:host=$SERVER;dbname=$BBDD";
 
-
+$pdo_ropadecu = new PDO($DNS,$USER, $PASS);
 ?>
