@@ -111,6 +111,7 @@ function importar_clientes(string $archivo)
 
             $stm->execute([$valor2, $valor1]);
             $rows += $stm->rowCount();
+
             //echo "$valor1 - $valor2 - $valor3<br/>" ;
             // }else{
             //     $query = "INSERT INTO categoria(id, nombre_categoria, id_prod) 
@@ -149,8 +150,9 @@ function importar_productos(string $archivo)
         //TODO valorar si hacer una actualizacion 
 
         for ($nFila = 2; $nFila <= $numeroFilas; $nFila++) {
-            $valor1  = $hojaActual->getCell([1, $nFila]);
+            $valor1  = $hojaActual->getCell([1, $nFila]);//nombre
             $valor2  = $hojaActual->getCell([2,  $nFila]);
+            //echo($valor2);
             $valor3  = $hojaActual->getCell([3, $nFila]);
             $valor4  = $hojaActual->getCell([4, $nFila]);
             $valor5  = $hojaActual->getCell([5, $nFila]);
@@ -160,19 +162,52 @@ function importar_productos(string $archivo)
             //$valor9  = $hojaActual ->getCell([9, $nFila]);
             //$valor10 = $hojaActual->getCell([10, $nFila]);
 
-            $query = "UPDATE producto SET 
+            //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
+            $query = "SELECT id_producto FROM producto WHERE id_producto = $valor1";
+            $stm = $GLOBALS['pdo']->prepare($query);
+            $stm ->execute();
+            //$rows += $stm->rowCount();
+
+            if($stm->rowCount() == 0){
+                $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente, codigo_barra, codigo_interno, precio_compra, precio_venta)
+                      VALUES (?,?,?,?,?,?,?)";
+                $stm = $GLOBALS['pdo']->prepare($query);
+                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8 /*$valor9,*/]);
+                $rows += $stm->rowCount();
+                                
+            }else{
+                $query = "UPDATE producto SET 
                 nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?,
                 precio_compra=?,precio_venta=?/*,ubicacion= ?*/
                 WHERE id_producto = ?";
+                $stm = $GLOBALS['pdo']->prepare($query);
+                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
+                $rows += $stm->rowCount();
+            }
+           
+
+            // $query = "UPDATE producto SET 
+            //     nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?,
+            //     precio_compra=?,precio_venta=?/*,ubicacion= ?*/
+            //     WHERE id_producto = ?";
 
 
-            $stm = $GLOBALS['pdo']->prepare($query);
-            $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
-            $rows += $stm->rowCount();
+            // $stm = $GLOBALS['pdo']->prepare($query);
+            // $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
+            // $rows += $stm->rowCount();
+            // //Si se ha añadido un nuevo registro en el Excel, insertar nuevo regitro en la tabla
+            // if($stm->rowCount() > 0){
+            //     $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente,codigo_barra,codigo_interno,precio_compra,precio_venta)
+            //           VALUES (?,?,?,?,?,?,?)";
+            //     $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
+            //     $rows += $stm->rowCount();
+            //     //echo $valor1;
+            // }
         }
     } catch (\Throwable $th) {
-        echo "Error al importar<br/> ";
+        echo "Error al importar: $th<br/> ";
     } finally {
+        
         echo  "Registros importados: $rows";
         $documento->disconnectWorksheets();
         unset($documento);
