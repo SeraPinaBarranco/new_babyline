@@ -203,10 +203,29 @@ let table2 = new Tabulator("#example-table", {
 
 //! Funcion de eliminar fila
 function cellClick_DeleteButton(e, cell) {
+  console.log(cell.getRow().getData())
   //! Llama a eliminar producto
-  console.log(cell.getRow().getData().id_producto);
-  borraValoresTabla(cell.getRow().getData().id_producto);
-  cell.getRow().delete();
+  Swal.fire({
+    title: 'Cuidado!!',
+    text: `El registro ${ cell.getRow().getData().nombre.toUpperCase()} se eliminará definitivamente de la tabla`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, borrar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Borrado!',
+        `${ cell.getRow().getData().nombre.toUpperCase()} ha sido eliminado`,
+        'success',
+        //console.log(cell.getRow().getData().id_producto);
+        borraValoresTabla(cell.getRow().getData().id_producto),
+        cell.getRow().delete()
+      )
+    }
+  })
+
 }
 
 let form = document.forms[0];
