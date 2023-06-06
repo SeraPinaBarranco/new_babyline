@@ -106,20 +106,27 @@ function importar_clientes(string $archivo)
             //if ($valor3 =="") {//si es vacio crear consulta sin id_prod
             // $query = "INSERT INTO categoria(id, nombre_categoria) 
             //         VALUES (?, ?)";
-            $query = "UPDATE tiendas SET nombre=? WHERE id_tienda = ?";
+
+            //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
+            $query = "SELECT id_tienda FROM tiendas WHERE id_tienda = $valor1";
             $stm = $GLOBALS['pdo']->prepare($query);
+            $stm ->execute();
 
-            $stm->execute([$valor2, $valor1]);
-            $rows += $stm->rowCount();
+            if($stm->rowCount() == 0){
+                $query = "INSERT INTO tiendas (nombre) VALUES (?)";
+                $stm = $GLOBALS['pdo']->prepare($query);
+    
+                $stm->execute([$valor2]);
+                $rows += $stm->rowCount();
+            }else{
+                $query = "UPDATE tiendas SET nombre=? WHERE id_tienda = ?";
+                $stm = $GLOBALS['pdo']->prepare($query);
+    
+                $stm->execute([$valor2, $valor1]);
+                $rows += $stm->rowCount();
+            }
 
-            //echo "$valor1 - $valor2 - $valor3<br/>" ;
-            // }else{
-            //     $query = "INSERT INTO categoria(id, nombre_categoria, id_prod) 
-            //         VALUES (?, ?, ?)";
-            //     $stm = $GLOBALS['pdo']->prepare($query);
 
-            //     $stm->execute([$valor1,$valor2,$valor3]);
-            // }
 
         }
 
@@ -186,23 +193,6 @@ function importar_productos(string $archivo)
             }
            
 
-            // $query = "UPDATE producto SET 
-            //     nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?,
-            //     precio_compra=?,precio_venta=?/*,ubicacion= ?*/
-            //     WHERE id_producto = ?";
-
-
-            // $stm = $GLOBALS['pdo']->prepare($query);
-            // $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
-            // $rows += $stm->rowCount();
-            // //Si se ha añadido un nuevo registro en el Excel, insertar nuevo regitro en la tabla
-            // if($stm->rowCount() > 0){
-            //     $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente,codigo_barra,codigo_interno,precio_compra,precio_venta)
-            //           VALUES (?,?,?,?,?,?,?)";
-            //     $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
-            //     $rows += $stm->rowCount();
-            //     //echo $valor1;
-            // }
         }
     } catch (\Throwable $th) {
         echo "Error al importar: $th<br/> ";
@@ -231,17 +221,33 @@ function importar_categorias(string $archivo)
             $valor2 = $hojaActual->getCell([2,  $nFila]);
             //$valor3 = $hojaActual->getCell([3,   $nFila]);
             //if ($valor3 =="") {//si es vacio crear consulta sin id_prod
-
-            $query = "UPDATE categoria SET nombre_categoria = ? WHERE id = ?";
+            
+            
+            //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
+            $query = "SELECT id FROM categoria WHERE id = $valor1";
             $stm = $GLOBALS['pdo']->prepare($query);
+            $stm ->execute();
 
-            $stm->execute([$valor2, $valor1]);
-            $rows += $stm->rowCount();
+            if($stm->rowCount() == 0){
+                $query = "INSERT INTO categoria (nombre_categoria) VALUES (?)";
+                $stm = $GLOBALS['pdo']->prepare($query);
+    
+                $stm->execute([$valor2]);
+                $rows += $stm->rowCount();
+            }else{
+
+                $query = "UPDATE categoria SET nombre_categoria = ? WHERE id = ?";
+                $stm = $GLOBALS['pdo']->prepare($query);
+    
+                $stm->execute([$valor2, $valor1]);
+                $rows += $stm->rowCount();
+            }
+
         }
 
         echo  "Registros importados con éxito!!<br/>";
     } catch (\Throwable $th) {
-        echo "Error al importar<br/> ";
+        echo "Error al importar:<br/>" . $th ;
     } finally {
         echo  "Registros importados: $rows";
         $documento->disconnectWorksheets();
