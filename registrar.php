@@ -8,20 +8,39 @@
 
 <head>
     <?php include "./uis/head.php" ?>
-    <link rel="stylesheet" href="./styles/menu_lateral.css">
-    <link rel="stylesheet" href="./styles/style_registrar.css">
+    <!-- <link rel="stylesheet" href="./styles/menu_lateral.css">
+    <link rel="stylesheet" href="./styles/style_registrar.css"> -->
     <script src="./controller/registrar_producto_controller.js" defer></script>
     <title>Registrar producto</title>
 </head>
 
-<body>
+<body style="display: flex; justify-content:center; text-align: center">
+
+    <header>
+        <div class="logo">
+            <span class="span_logo mt-2 mb-2">
+                <a class="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <i class="fa-solid fa-bars hamburguer" style="color: #fff;"></i>
+                </a>
+            </span>
+
+            <h2 class="logo-title mt-1 mb-1 ms-2">Gestión de Almacén</h2>
+
+        </div>
+
+    </header>
 
     <?php include "./uis/menu-lateral.php" ?>
 
-    <div class="content-wrapper" style="width:100%">
-        <h3 align="center">Registro de Producto</h3>
+
+
+    <div class="content-wrapper mt-5 " style="width:50%">
+
+
+
+        <h3 class="mt-3" align="center">Registro de Producto</h3>
         <br />
-        <div class="formulario " align="center">
+        <div class=" formulario" >
             <!--<form action="index.php?pag=registrar" method="post" name="formu" class="form-search" >-->
             <form action="" method="post" name="formu" class="form-search" id="registrar_producto">
 

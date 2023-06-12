@@ -1,0 +1,114 @@
+:root {
+  --rosa: #e681c4;
+  --azul: #5f9ea0;
+  --azul-menu: #5f9ea0d2;
+  --azul-menu2: #314748;
+  --amarillo: rgba(230, 208, 83, .5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: var(--amarillo); */
+  
+  margin: 0 auto;
+  width: 90%;
+  height: 600px;
+  border-radius: 5px 5px ;
+  padding: 20px;
+  
+}
+
+header{
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+}
+
+#almacen{
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .3;
+}
+
+#imagen_pollo{
+  width: 12vw;
+  height: 12vh;
+  /* position: relative; */
+  opacity: .5;
+  margin-left: 80vw;
+}
+
+
+
+.logo {
+  display: flex;
+  background-color: #5f9ea0; 
+}
+
+#enviar:hover .tooltiptext{
+  visibility: visible;
+}
+
+.logo-title {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+}
+
+.hamburguer {
+  margin-left: 10px;
+  font-size: x-large;
+}
+
+.offcanvas-body{
+  background-color: var(--azul-menu2);
+  
+}
+
+.offcanvas-body > span,li{
+  padding-left: 20px;
+}
+
+.offcanvas-header {
+  background-color: cadetblue;
+  color: #fff;
+  font-weight: bold;
+}
+
+:is(li, .offcanvas-body > span) {
+  list-style: none;
+  /* color: #5f9ea0; */
+  color: #fff;
+  font-weight: lighter;
+}
+
+i{
+  color: #fff;
+}
+button{
+  border: 0;
+  padding: 5px 8px;
+  border-radius: 5px 5px 5px 5px ;
+  background-color: var(--amarillo);
+}
+
+footer{
+  width: 100%;
+  height: 80px;
+  background-color: #5f9ea0;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+}
