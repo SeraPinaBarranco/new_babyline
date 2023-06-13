@@ -8,25 +8,26 @@
 
 <head>
     <?php include "./uis/head.php" ?>
-    <link rel="stylesheet" href="./styles/menu_lateral.css">
-    <link rel="stylesheet" href="./styles/style_registrar.css">
+
     <script type="module" src="./controller/clientes_controller.js" defer></script>
     <title>Registrar cliente</title>
 </head>
 
 <body>
 
+    <?php include_once "./uis/header.php"; ?>
+
     <?php include "./uis/menu-lateral.php" ?>
 
-    <div class="content-wrapper" style="width:100%">
+    <div class="content-wrapper mt-5" style="width:100%" align="center">
         <h3 align="center">Registro de Clientes</h3>
         <br />
-        <div class="formulario " align="center">
+        <div class="formulario col-4" >
             <!--<form action="index.php?pag=registrar" method="post" name="formu" class="form-search" >-->
             <form action="" method="post" name="formu" class="form-search" id="registrar_cliente">
 
                 <div class=" ">
-                    <input type="text" id="cliente" name="cliente" class="form-control mb-3" value="" placeholder="Nombre" required/>
+                    <input type="text" id="cliente" name="cliente" class="form-control mb-3" value="" placeholder="Nombre" required />
                 </div>
 
 
@@ -40,15 +41,6 @@
 
 </body>
 
-<script>
-    document.getElementById("boton-hamburguesa").addEventListener("click", function() {
-        var menu = document.getElementById("menu-hamburguesa");
-        if (menu.style.display === "none") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
-        }
-    });
-</script>
+<?php include "./uis/footer.php"; ?>
 
 </html>

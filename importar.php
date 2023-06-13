@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <?php include "./uis/head.php" ?>
-    <link rel="stylesheet" href="./styles/menu_lateral.css">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+    <?php include_once "./uis/header.php"; ?>
+
     <?php include "./uis/menu-lateral.php" ?>
     <section>
-        <div class="container mt-3">
+        <div class="container mt-5">
             <form action="./model/importaciones.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="archivo">
-                
+
                 <input class="btn btn-success" type="submit" name="importar-productos" value="Importar productos">
-                
+
                 <input class="btn btn-success" type="submit" name="importar-categorias" value="Importar categorias">
 
                 <input class="btn btn-success" type="submit" name="importar-clientes" value="Importar clientes">
@@ -24,17 +28,9 @@
             </form>
         </div>
     </section>
-    
 
-    <script>
-    document.getElementById("boton-hamburguesa").addEventListener("click", function() {
-        var menu = document.getElementById("menu-hamburguesa");
-        if (menu.style.display === "none") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
-        }
-    });
-</script>
+
+    <?php include "./uis/footer.php"; ?>
 </body>
+
 </html>

@@ -3,9 +3,8 @@
 
 <head>
     <?php include "./uis/head.php" ?>
-    <link rel="stylesheet" href="./styles/menu_lateral.css">
-    <link rel="stylesheet" href="./styles/style_registrar.css">
-    
+
+
 
     <!-- DATA TABLES -->
     <link rel="stylesheet" href="./plugins/datatables/data_tables.css" />
@@ -20,6 +19,8 @@
 </head>
 
 <body>
+    <?php include_once "./uis/header.php"; ?>
+
     <?php include "./uis/menu-lateral.php" ?>
 
     <!-- EDITION MODAL -->
@@ -35,7 +36,7 @@
 
                 <div class="modal-body">
                     <p id="parrafo-modal">Listado de ubicaciones del almacen</p>
-                    <div class="dropdown">                        
+                    <div class="dropdown">
                         <select class="form-select" aria-label="Default select example" id="select_ubicacion">
                             <option selected>Open this select menu</option>
                             <option value="1">One</option>
@@ -67,15 +68,15 @@
                 <div class="container">
                     <span>Los valores <b>negativos generan salida</b><br> y los <b>positivos generan entradas</b></span>
 
-                </div>    
+                </div>
 
                 <div class="modal-body">
                     <p id="parrafo-modal-salida"></p>
                     <div class="mt-3">
                         <input type="number" class="form-control" value="-1" id="cantidad_salida">
                     </div>
-                    
-                    
+
+
                 </div>
 
                 <div class="modal-footer">
@@ -89,10 +90,10 @@
 
 
 
-    <div class="content-wrapper" style="width:100%">
+    <div class="content mt-5" style="width:100%" align="center">
         <h3 align="center">Busqueda de clientes</h3>
         <br />
-        <div class="formulario " align="center">
+        <div class="formulario col-3" >
             <!--<form action="index.php?pag=registrar" method="post" name="formu" class="form-search" >-->
             <form action="" method="post" name="formu" class="form-search" id="registrar_producto">
 
@@ -106,31 +107,15 @@
             </form>
         </div>
 
-        
+
     </div>
 
-    <div class="mt-5">
+    <div class="mt-5" style="padding-left: 35%; padding-right:35% ">
         <div id="tabla"></div>
     </div>
 
+    <?php include "./uis/footer.php"; ?>
 </body>
 
-<script>
-    document.getElementById("boton-hamburguesa").addEventListener("click", function() {
-        var menu = document.getElementById("menu-hamburguesa");
-        if (menu.style.display === "none") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
-        }
-    });
- 
-    // $('#myModal').on('shown.bs.modal', function() {
-    //     $('#myInput').trigger('focus')
-    // })
-</script>
-
-
-<!-- <script src="./plugins/datatables/data_tables.js"></script> -->
 
 </html>

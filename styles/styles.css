@@ -112,3 +112,20 @@ footer{
   position: fixed;
   bottom: 0;
 }
+
+a {
+  text-decoration: none;
+  transition: font-size .2s;
+}
+
+a:visited {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+a:hover{
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.661);
+  
+}

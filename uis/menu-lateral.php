@@ -81,6 +81,9 @@
     <!-- MENU NUEVO -->
     <aside class="aside-menu-icon">
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="container" align="center">
+                <img src="./assets/images/pollo.png" alt="imagen logo babyline" style="width: 35%">
+            </div>
 
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel"><a href="index.php">MENÚ</a></h5>
@@ -92,28 +95,47 @@
                 <span><i class="fa fa-dashboard me-2" style="color: #fff;"></i>Inventario</span>
                 <ul class="">
                     <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="registrar.php">Registrar</a></li>
-                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="./views/vista2.php">Buscar</a></li>
+                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="buscar.php">Buscar/Operaciones</a></li>
 
                 </ul>
 
-                <span><i class="fa-solid fa-right-from-bracket me-2" style="color: #fff;"></i>Salida</span>
+                <!-- <span><i class="fa-solid fa-right-from-bracket me-2" style="color: #fff;"></i><a class="uri" href="salida.php">Salida</a></span> -->
                 <ul></ul>
 
-                <span><i class="fa-solid fa-clock-rotate-left me-2" style="color: #fff;"></i>Historial</span>
+                <!-- <span><i class="fa-solid fa-clock-rotate-left me-2" style="color: #fff;"></i>Historial</span>
                 <ul class="">
                     <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i>Entrada</li>
                     <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i>Salida</li>
 
-                </ul>
+                </ul> -->
 
                 <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i>Registrar BD Remota</span>
                 <ul></ul>
-                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i>Actualizar Webs</span>
+                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="actualizar_webs.php">Actualizar Webs</a></span>
                 <ul></ul>
-                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i>Exportar</span>
+                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="exportar.php">Exportar productos de clientes</a></span>
                 <ul></ul>
-                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i>Importar</span>
+                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="importar.php">Importar</a></span>
                 <ul></ul>
+                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="listado_precios_especificos.php">Listado precios especificos</a></span>
+                <ul></ul>
+
+                <span><i class="fa-solid fa-people-arrows me-2"></i>Clientes</span>
+                
+                <ul class="">
+                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="registrar_cliente.php">Registrar</a></li>
+                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="listar_clientes.php">Listado</a></li>
+
+                </ul>
+
+                
+                <span><i class="fa-solid fa-list me-2" style="color: #fff;"></i>Categorias</span>
+                <ul class="">
+                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="nueva_categoria.php">Nueva</a></li>
+                    
+                </ul>
+                
+                
                 <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i>Actualizar a3erp</span>
                 <ul></ul>
 

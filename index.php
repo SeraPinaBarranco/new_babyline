@@ -8,20 +8,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <span class="span_logo mt-2 mb-2">
-                <a class="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    <i class="fa-solid fa-bars hamburguer" style="color: #fff;"></i>
-                </a>
-            </span>
 
-            <h2 class="logo-title mt-1 mb-1 ms-2">Gestión de Almacén</h2>
-
-        </div>
-
-    </header>
-
+    <?php  include_once "./uis/header.php"; ?>
 
     <?php include "./uis/menu-lateral.php" ?>
 
@@ -46,13 +34,7 @@
         <!-- /.content -->
     </div>
 
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 0.1
-        </div>
-        <strong>Copyright &copy; 2013-2018
-            <a href="" target="_blank">Serafín Piña</a>.</strong> All rights reserved.
-    </footer>
+    <?php include "./uis/footer.php"; ?>
 
 </body>
 
