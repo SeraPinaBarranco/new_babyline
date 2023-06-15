@@ -19,11 +19,23 @@ if($pdo_ropadecu){
 
     $query = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? and ean = ?";
         
-    $stm = $pdo_ropadecu->prepare($query);
-    
+    $stm = $pdo_ropadecu->prepare($query);    
     $stm->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
     
-    $data = $stm->rowCount();
+    $stm_baby = $pdo_baby->prepare($query);
+    $stm_baby->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
+
+    //$data = $stm->rowCount();
+}
+
+if($pdo_baby){    
+
+   
+    $query_baby = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? and ean = ?";
+    $stm_baby = $pdo_baby->prepare($query_baby);    
+    $stm_baby->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
+
+    //$data = $stm_baby->rowCount();
 }
 
 
