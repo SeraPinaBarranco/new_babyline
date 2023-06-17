@@ -4,7 +4,9 @@
     $data = "";
 
     $id_cliente = $_POST['id_cliente'];
-    $nombre =strtoupper(htmlspecialchars($_POST['cliente']));
+    if(!empty($_POST['cliente'])){        
+        $nombre =strtoupper(htmlspecialchars($_POST['cliente']));
+    } 
     $tag=  $_POST['tag'];
 
     if($tag == 'actualizar'){

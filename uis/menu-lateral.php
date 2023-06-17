@@ -132,7 +132,8 @@
                 <span><i class="fa-solid fa-list me-2" style="color: #fff;"></i>Categorias</span>
                 <ul class="">
                     <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="nueva_categoria.php">Nueva</a></li>
-                    
+                    <li class="" aria-disabled="true"><i class="fa-regular fa-circle me-2" style="color: #fff;"></i><a class="uri" href="listar_categorias.php">Listado</a></li>
+
                 </ul>
                 
                 
