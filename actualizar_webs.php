@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="container">
-                <input class="btn btn-primary" type="submit" name="web" value="Actualizar todas las webs">
+                <input class="btn btn-primary" type="submit" name="web" value="Actualizar todas las webs" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">
                 </div>
             </div>
         </form>

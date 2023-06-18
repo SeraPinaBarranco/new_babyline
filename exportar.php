@@ -22,17 +22,21 @@
     <?php include "./uis/menu-lateral.php" ?>
 
     <div class="container-fluid mb-5">
+        <div class="row mt-2" style="display: flex;"> 
+            
+            <div class="container-fluid mt-2 mb-3" style="text-align: center;">
+                <button class="btn btn-success" id="btnExportar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Exportar</button>
+            </div>
 
-        <div class="container col-12 mt-5 shadow-lg" id="con-tabla">
+        </div>
+
+        <div class="container col-12 mt-3 shadow-lg" id="con-tabla">
             <div id="tabla"></div>
         </div>
 
-        <div class="container-fluid mt-2 mb-5" style="text-align: center;">
-            <button class="btn btn-success" id="btnExportar">Exportar</button>
-        </div>
 
     </div>
-    
+
     <script type="module" src="./controller/export_precios_clientes.js"></script>
     <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 

@@ -93,15 +93,15 @@
     <div class="content mt-5" style="width:100%" align="center">
         <h3 align="center">Busqueda de clientes</h3>
         <br />
-        <div class="formulario col-3" >
+        <div class="container formulario col-3" >
             <!--<form action="index.php?pag=registrar" method="post" name="formu" class="form-search" >-->
             <form action="" method="post" name="formu" class="form-search" id="registrar_producto">
 
                 <div class=" ">
                     <input type="text" id="buscar" name="buscar" class="form-control mb-3 buscar" value="" placeholder="Buscar Por Nombre" />
-
+                </div>
                     <div>
-                        <input type="submit" name="buscar" value="Buscar" class="btn btn-success" id="btn_buscar" />
+                        <input type="submit" name="buscar" value="Buscar" class="btn btn-success" id="btn_buscar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;"/>
                     </div>
 
             </form>

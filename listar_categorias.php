@@ -35,7 +35,7 @@
                     <input type="text" id="buscar" name="buscar" class="form-control mb-3 buscar" value="" placeholder="Buscar Por Nombre" />
 
                     <div>
-                        <input type="submit" name="buscar" value="Buscar" class="btn btn-success" id="btn_buscar" />
+                        <input type="submit" name="buscar" value="Buscar" class="btn btn-success" id="btn_buscar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;"/>
                     </div>
 
             </form>

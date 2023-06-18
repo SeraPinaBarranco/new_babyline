@@ -75,7 +75,7 @@
 
 
                 <div class="col-6 ">
-                    <input type="submit" name="registrar" value="Registrar" class="btn btn-success" />
+                    <input type="submit" name="registrar" value="Registrar" class="btn btn-success" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;" />
                 </div>
 
             </form>

@@ -134,7 +134,7 @@
                         <input type="text" id="buscar" name="buscar" class="form-control mb-3 buscar" value="" placeholder="Buscar Por Nombre - Codigo Barra - Codigo Interno" />
                     </div>
                     <div class="col-6 ">
-                        <input type="submit" name="btn_buscar" value="Buscar" class="btn btn-success" id="btn_buscar" />
+                        <input type="submit" name="btn_buscar" value="Buscar" class="btn btn-success" id="btn_buscar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;"/>
                     </div>
 
                 </form>
@@ -147,7 +147,7 @@
         </div>
 
         <div class="mb-5">
-            <button class="btn btn-success mt-3 mb-5" id="download-xlsx">Download XLSX</button>
+            <button class="btn btn-success mt-3 mb-5" id="download-xlsx" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Download XLSX</button>
         </div>
         <!-- <div id="example-table"></div> -->
 

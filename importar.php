@@ -19,11 +19,11 @@
             <form action="./model/importaciones.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="archivo">
 
-                <input class="btn btn-success" type="submit" name="importar-productos" value="Importar productos">
+                <input class="btn btn-success" type="submit" name="importar-productos" value="Importar productos" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">
 
-                <input class="btn btn-success" type="submit" name="importar-categorias" value="Importar categorias">
+                <input class="btn btn-success" type="submit" name="importar-categorias" value="Importar categorias" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">
 
-                <input class="btn btn-success" type="submit" name="importar-clientes" value="Importar clientes">
+                <input class="btn btn-success" type="submit" name="importar-clientes" value="Importar clientes" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">
 
             </form>
         </div>

@@ -27,7 +27,7 @@
 
 
                 <div>
-                    <input type="submit" name="registrar" id="btnRegistrar" value="Registrar" class="btn btn-success" />
+                    <input type="submit" name="registrar" id="btnRegistrar" value="Registrar" class="btn btn-success" style="background-color: var(--amarillo);border-style:none;  font-weight: 500;"/>
                 </div>
 
             </form>
