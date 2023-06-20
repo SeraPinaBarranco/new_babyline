@@ -58,7 +58,36 @@ window.addEventListener("load", (e) => {
   res
     .then((res) => res.text())
     .then((_datos) => {
-      console.log(_datos);
+      
       table2.setData(_datos);
     });
 });
+
+
+//! Exportar a Excel
+document.getElementById("download-xlsx").addEventListener("click", function(){
+  /*table2.columnManager.columnsByIndex.splice(13,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(12,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(11,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(10,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(9,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(8,1)
+  table2.columnManager.columns.pop()
+  // table2.columnManager.columnsByIndex.pop()
+  //table2.columnManager.columns.pop()
+  // table2.columnManager.columnsByIndex.pop()
+  //table2.columnManager.columns.pop()
+  // table2.columnManager.columnsByIndex.pop()
+  //table2.columnManager.columns.pop()
+  console.log(table2)
+  console.log(table2.columnManager);
+  console.log(table2.columnManager.columnsByField)//object*/
+  table2.download("xlsx", "productos_especificos.xlsx", {sheetName:"Productos_especificos"});
+  location.reload();
+});
+

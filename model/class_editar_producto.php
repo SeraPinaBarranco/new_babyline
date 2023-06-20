@@ -3,6 +3,7 @@
 header("Content-Type: application/json");
 include_once("./db.php");
 include_once("./ropadecu.php");
+//include_once ("./tabla_basedatos.php");
 include_once("./class_producto.php");
 
 
@@ -13,30 +14,32 @@ $datos = explode(",",$_POST["datos"]);
 
 $res = $producto->actualiar($datos);
 
-
+//actualizar_webs_con_Productos($datos[5], $datos[7], $datos[2], $datos[1]);
 //TODO Actualizar web al actualizar un producto
 if($pdo_ropadecu){
 
-    $query = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? and ean = ?";
+    //$bbdd = getTablaBaseDatos();
+
+    //TODO VALORAR COMO ACTUALIZAR LAS BASES DE DATOS
+    $query = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? or ean = ?";
         
     $stm = $pdo_ropadecu->prepare($query);    
     $stm->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
-    
-    $stm_baby = $pdo_baby->prepare($query);
-    $stm_baby->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
+   
 
-    //$data = $stm->rowCount();
+    $data = $stm->rowCount();
 }
 
 if($pdo_baby){    
+    
+    $query_baby = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? or ean = ?";
 
-   
-    $query_baby = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? and ean = ?";
     $stm_baby = $pdo_baby->prepare($query_baby);    
     $stm_baby->execute([$datos[5], $datos[7], $datos[2], $datos[1]]);
-
-    //$data = $stm_baby->rowCount();
+    
+    $data = $stm_baby->rowCount();
 }
+
 
 
 // print_r($datos);

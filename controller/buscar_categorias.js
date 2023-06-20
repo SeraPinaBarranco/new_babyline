@@ -5,7 +5,7 @@ let btn_buscar = document.querySelector("#btn_buscar");
 let txt_buscar = document.querySelector("#buscar");
 
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
-    return `<i class="fas fa-edit"></i>`;
+    return `<i class="fas fa-edit" style="color: grey;"></i>`;
   };
   
   let deleteIcom = (_cell, _formatterParams, _onRendered)=>{
@@ -25,12 +25,18 @@ let updateIcom = function (_cell, _formatterParams, _onRendered) {
     paginationCounter: "rows",
     columns: [
       {
+        title: "id",
+        field: "id",
+        editor: "input"
+        
+      },
+      {
         title: "Nombre",
         field: "nombre_categoria",
         editor: "input",
         cellEdited: (cell) => {
           //console.log(cell._cell.row.cells[8].element.innerHTML)
-          cell._cell.row.cells[1].element.innerHTML =
+          cell._cell.row.cells[2].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
         },
       },
@@ -48,7 +54,7 @@ let updateIcom = function (_cell, _formatterParams, _onRendered) {
           let entradas = cell.getRow().getData();
   
           editarValoresTabla(entradas);
-          cell._cell.element.innerHTML = `<i class="fas fa-edit"></i>`;
+          cell._cell.element.innerHTML = `<i class="fas fa-edit" style="color: grey;"></i>`;
         },
       },
       {

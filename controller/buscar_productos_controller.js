@@ -54,7 +54,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -64,7 +64,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -74,7 +74,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -84,7 +84,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -94,7 +94,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -104,7 +104,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -114,9 +114,15 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[12].element.innerHTML =
+        cell._cell.row.cells[13].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
+    },
+    {
+      title: "Categoria",
+      field: "nombre_categoria",
+      
+      
     },
     {
       title: "Ubicacion",
