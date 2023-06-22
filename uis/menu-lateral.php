@@ -109,7 +109,7 @@
 
                 </ul> -->
 
-                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="./model/comprobar_ean_model.php">Registrar BD Remota</a></span>
+                <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="./model/tablas_basedatos.php">Registrar BD Remota</a></span>
                 <ul></ul>
                 <span><i class="fa-solid fa-book me-2" style="color: #fff;"></i><a class="uri" href="actualizar_webs.php">Actualizar Webs</a></span>
                 <ul></ul>
