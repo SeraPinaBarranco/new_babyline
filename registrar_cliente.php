@@ -39,8 +39,8 @@
         </div>
     </div>
 
+    <?php include "./uis/footer.php"; ?>
 </body>
 
-<?php include "./uis/footer.php"; ?>
 
 </html>
