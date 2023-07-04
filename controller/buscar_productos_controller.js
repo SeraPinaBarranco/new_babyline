@@ -8,6 +8,7 @@ let nombre_producto = "";
 let btn_actualizar = document.querySelector("#dar_salida");
 let parrafo_modal_salida = document.querySelector("#parrafo-modal-salida");
 let btnGuardarPrecio = document.querySelector("#btnGuardarPrecio");
+let botonGuardarCategoria = document.getElementById("actualizarCategoria");
 
 //! BOTONES DE LA TABLA */
 let updateIcom = function (_cell, _formatterParams, _onRendered) {
@@ -28,6 +29,11 @@ let salidaIcon = function (_cell, _formatterParams, _onRendered) {
 
 let asignarPrecio = (_cell, _formatterParams, _onRendered) => {
   return `<i class="fas fa-hand-holding-usd" data-bs-toggle="modal" data-bs-target="#myModalPrecios"></i>`;
+};
+
+let categoria_edit = (_cell, _formatterParams, _onRendered) => {
+  //`<i class="fa-sharp fa-solid fa-calendar-lines-pen"></i>`
+  return `<i class="fa-solid fa-file-pen" data-bs-toggle="modal" data-bs-target="#myModalCategoria" style="color: grey"></i>`;
 };
 //! ------------------------ //
 
@@ -54,7 +60,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -64,7 +70,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -74,7 +80,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -84,7 +90,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -94,7 +100,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -114,15 +120,14 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[14].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
     {
       title: "Categoria",
       field: "nombre_categoria",
-      
-      
+      formatter: "plaintext",      
     },
     {
       title: "Ubicacion",
@@ -142,7 +147,7 @@ let table2 = new Tabulator("#example-table", {
       print: false,
       formatter: ubicacionIcon,
       cellClick: (_e, cell) => {
-        nombre_producto = cell._cell.row.cells[0].value;
+        nombre_producto = cell._cell.row.cells[1].value;
         id_p = cell._cell.value;
         cargarModal();
       },
@@ -155,12 +160,24 @@ let table2 = new Tabulator("#example-table", {
       print: false,
       formatter: asignarPrecio,
       cellClick: (_e, cell) => {
-        nombre_producto = cell._cell.row.cells[0].value;
+        nombre_producto = cell._cell.row.cells[1].value;
         id_p = cell._cell.value;
         cargarModalClientes();
       },
     },
-
+    {
+      title: "Editar categoria",
+      field: "categoria_id",
+      hozAlign: "center",
+      print: false,
+      formatter: categoria_edit,
+      cellClick: (_e, cell) => {
+        nombre_producto = cell._cell.row.data.nombre;
+        id_p = cell._cell.row.data.id_producto;
+        
+        cargarModalCategoria();
+      },
+    },
     {
       title: "Dar Entrada/Salida",
       field: "id_producto",
@@ -469,6 +486,30 @@ function cargarModalClientes() {
     });
 }
 
+function cargarModalCategoria() {
+  let textoH5Modal = document.querySelector("#titulo_modal_categoria");
+  textoH5Modal.innerHTML = `Registrar categoria diferente para:</br> ${nombre_producto}`;
+  let selCategorias = document.querySelector("#select_categorias");
+  let opciones = "";
+
+  let uri = "./model/class_buscar_categorias.php";
+  let campos = `categoria=${""}`;
+
+  const res = requestText(uri, campos);
+
+  res
+    .then((res) => res.json())
+    .then((datos) => {
+      console.log(datos);
+
+      datos.forEach((element) => {
+        opciones += `<option value="${element.id}">${element.nombre_categoria}</option>`;
+      });
+      selCategorias.innerHTML = opciones;
+      //TODO Llenar listado con el select
+    });
+}
+
 btnGuardarPrecio.addEventListener("click", () => {
   let precio_diferente = document.querySelector("#precioTienda");
   let selClientes = document.querySelector("#selectClientes").value;
@@ -481,7 +522,7 @@ btnGuardarPrecio.addEventListener("click", () => {
     //headers: { "Content-Type": "application/x-www-form-urlencoded" },
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };
-  console.log(configFetch.body)
+  //console.log(configFetch.body)
   //mandar la peticion
   let promesa = fetch(url, configFetch);
   let option = "";
@@ -511,8 +552,53 @@ btnGuardarPrecio.addEventListener("click", () => {
     });
 });
 
+//TODO Guardar CATEGORIA
+botonGuardarCategoria.addEventListener('click', ()=>{
+  let selCategorias = document.querySelector("#select_categorias").value;
+  let url = "./model/class_actualizar_categoria_producto.php"
+
+  let configFetch = {
+    method: "POST",
+    body: `id=${id_p}&categoria=${selCategorias}`,
+    //headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  let promesa = fetch(url, configFetch);
+
+  //console.log(selCategorias)
+  promesa
+    .then((res) => res.text())
+    .then((_datos) => {
+      console.log(_datos);
+      if (_datos == 1) {
+        Swal.fire({
+          title: "Actualizado!",
+          text: "Precio registrado",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        }).then(() => buscarProducto());
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Error al registrar el precio",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+          timer: 1500,
+        });
+      }
+    
+    });
+  
+})
+
 //! Exportar a Excel
 document.getElementById("download-xlsx").addEventListener("click", function(){
+  table2.columnManager.columnsByIndex.splice(15,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(14,1)
+  table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(13,1)
   table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(12,1)

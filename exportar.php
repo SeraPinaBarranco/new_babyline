@@ -24,8 +24,8 @@
     <div class="container-fluid mb-5">
         <div class="row mt-2" style="display: flex;"> 
             
-            <div class="container-fluid mt-2 mb-3" style="text-align: center;">
-                <button class="btn btn-success" id="btnExportar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Exportar</button>
+            <div class="container-fluid mt-2" style="text-align: center;">
+                <button type="button" class="btn" id="btnExportar" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Exportar</button>
             </div>
 
         </div>

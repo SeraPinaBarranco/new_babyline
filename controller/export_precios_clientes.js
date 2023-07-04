@@ -6,8 +6,10 @@ let divTabla = document.querySelector("#tabla");
 
 let productos, precios, columna, tiendas
 
+
+//! Exportar a Excel
 btnExportar.addEventListener('click', ()=>{
-    table2.download("xlsx", "data.xlsx", {sheetName:"MyData"}); //download a xlsx file that has a sheet name of "MyData"
+    table2.download("xlsx", "listado_con_precios.xlsx", {sheetName:"MyData"}); //download a xlsx file that has a sheet name of "MyData"
 })
 
 window.addEventListener("load", (event) => {
@@ -42,7 +44,7 @@ let table2 = new Tabulator("#tabla", {
     paginationCounter: "rows",
     rowFormatter: function(row) {
         var cell = row.getCell(6);
-        console.log(row._row.cells)
+        //console.log(row._row.cells)
         // if (cell.getValue() < 0) {
         //     cell.getElement().style.color = "red";
         // }
@@ -89,8 +91,8 @@ function generarColumnas(){
         field: "Nombre_producto",
         editor: "input",}
 
-    console.log(precios)
-    console.log(columna)
+    //console.log(precios)
+    //console.log(columna)
     
 
     //TODO Generar estructura base
@@ -174,8 +176,10 @@ function doExcel(){
     }
 
 
-    console.log(productos)
+    //console.log(productos)
     table2.setData(productos)
     //generarColumnas()
 }
+
+
 
