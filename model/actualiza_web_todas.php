@@ -1,7 +1,31 @@
 <?php 
 
 include_once("./db.php");
-include_once("./ropadecu.php");
+//include_once("./ropadecu.php");
+
+
+//TODO traer los datos de la tabla basedatos    
+$query = "SELECT * FROM basedatos";
+$stm = $pdo->query($query);
+
+
+$i = 0;
+while ($data = $stm->fetch(PDO::FETCH_ASSOC)) {
+    //print_r($data);
+    extract($data);
+
+    //echo "$id_base - $ip - $db - $usuario - $clave - $pais - $cojer - $tabla  </br>" ;
+    //TODO Llamar a la funcion que guarda en base de datos remota
+    actualiza_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $pdo);
+}
+
+
+function actualiza_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $my_pdo) {
+    
+}
+
+
+
 
 
 $web = $_POST["web"];
@@ -13,7 +37,7 @@ $rows = 0;
     quantity (cantidad_existente)
     price    (precio_venta)
 */
-
+/*
 try {
     
     //? TRAER TODOS LOS PRODUCTOS PARA ACTUALIZAR
@@ -83,5 +107,5 @@ try {
     echo "Error al actualizar";
 }
 //TODO comprobar que todas las actualizaciones estan en 1 y si es asi borrar la tabla
-
+*/
 ?>
