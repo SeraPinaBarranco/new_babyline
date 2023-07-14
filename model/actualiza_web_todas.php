@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once("./db.php");
 //include_once("./ropadecu.php");
@@ -16,12 +16,40 @@ while ($data = $stm->fetch(PDO::FETCH_ASSOC)) {
 
     //echo "$id_base - $ip - $db - $usuario - $clave - $pais - $cojer - $tabla  </br>" ;
     //TODO Llamar a la funcion que guarda en base de datos remota
-    actualiza_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $pdo);
+    conexion_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $pdo);
 }
 
 
-function actualiza_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $my_pdo) {
-    
+function conexion_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $my_pdo)
+{
+    // 1 Crear conexion a base de datos remota
+    $SERVER =  $ip;
+    $USER   =  $usuario;    
+    $PASS   =  $clave;
+    $BBDD   =  $db;
+
+    $DNS = "mysql:host=$SERVER;dbname=$BBDD";
+
+    try {
+        $pdo = new PDO($DNS, $USER, $PASS);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Conexión exitosa a la base de datos.";
+
+        $estado = $pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS);
+        //SI LA CONEXIÓN ES EXITOSA RECORRER LA TABLA DE PRODUCTOS PARA ACTUALIZAR LAS WEB
+        if ($estado === "Connected") {
+            echo "La conexión está activa.";
+        } else {
+            echo "La conexión se perdió.";
+        }
+        echo $estado;
+
+    } catch (PDOException  $th) {
+        die("Error al conectar: " . $th->getMessage());
+    }
+
+
+
 }
 
 
@@ -108,4 +136,3 @@ try {
 }
 //TODO comprobar que todas las actualizaciones estan en 1 y si es asi borrar la tabla
 */
-?>
