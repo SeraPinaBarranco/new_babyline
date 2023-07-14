@@ -609,19 +609,51 @@ document.getElementById("download-xlsx").addEventListener("click", function(){
   table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(9,1)
   table2.columnManager.columns.pop()
-  //table2.columnManager.columnsByIndex.splice(8,1)
-  //table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(8,1)
+  table2.columnManager.columns.pop()
   // table2.columnManager.columnsByIndex.pop()
   //table2.columnManager.columns.pop()
   // table2.columnManager.columnsByIndex.pop()
   //table2.columnManager.columns.pop()
   // table2.columnManager.columnsByIndex.pop()
   //table2.columnManager.columns.pop()
-  console.log(table2)
+  console.log(table2.getData())
   console.log(table2.columnManager);
   console.log(table2.columnManager.columnsByField)//object
-  table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
-  location.reload();
+
+  let url = "./model/exportar_productos.php"
+
+  let configFetch = {
+    method: "POST",
+    body: `datos=${JSON.stringify(table2.getData())}`,    
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  };
+
+  let promesa = fetch(url, configFetch);
+
+  //console.log(selCategorias)
+  // promesa
+  // .then(response => response.blob())
+  // .then(blob => {
+  //   // Crear un objeto URL para el blob del archivo
+  //   var url = URL.createObjectURL(blob);
+
+  //   // Crear un enlace temporal
+  //   var link = document.createElement('a');
+  //   link.href = url;
+  //   link.download = 'Productos.xlsx';
+
+  //   // Simular un clic en el enlace para iniciar la descarga
+  //   link.click();
+
+  //   // Limpiar el objeto URL
+  //   URL.revokeObjectURL(url);
+  // })
+  // .catch(error => console.error('Error al descargar el archivo:', error));
+
+
+  //table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
+  //location.reload();
 });
 
 //TODO Buscar producto
