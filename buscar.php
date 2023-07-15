@@ -15,6 +15,7 @@
 
     <!-- XLSX Scripts -->
     <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js" defer></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js" defer></script> -->
 
     <link rel="stylesheet" href="./styles/buscar_styles.css">
 
@@ -175,10 +176,12 @@
 
         <div class="container-fluid mt-5">
             <div id="example-table"></div>
+        
         </div>
 
         <div class="mb-5">
             <button class="btn btn-success mt-3 mb-5" id="download-xlsx" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Download XLSX</button>
+            
         </div>
         <!-- <div id="example-table"></div> -->
 

@@ -107,8 +107,8 @@ class producto extends PDO
     {
         //$query = "SELECT * FROM producto WHERE codigo_barra LIKE :codigo_barra or nombre like :nombre or codigo_interno like :codigo_interno";
 
-        $query = "SELECT producto.*,  concat(ubicacion.fila, ' - ', ubicacion.estanteria) as ubicacion_almacen,
-                    categoria.nombre_categoria
+        $query = "SELECT producto.*,  concat(ubicacion.fila, ' - ', ubicacion.estanteria) as ubicacion_almacen, ubicacion.id_ubicacion as ubicacion_id,
+                    categoria.nombre_categoria, categoria.id as categoria_id
                     FROM producto 
                     LEFT OUTER JOIN ubicacion
 	                on producto.ubicacion = ubicacion.id_ubicacion

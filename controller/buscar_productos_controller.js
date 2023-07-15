@@ -60,7 +60,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -70,7 +70,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -80,7 +80,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -90,7 +90,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -100,7 +100,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -110,7 +110,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[13].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -120,7 +120,7 @@ let table2 = new Tabulator("#example-table", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[14].element.innerHTML =
+        cell._cell.row.cells[16].element.innerHTML =
           '<i class="fas fa-edit" style="color:green"></i>';
       },
     },
@@ -130,15 +130,20 @@ let table2 = new Tabulator("#example-table", {
       formatter: "plaintext",      
     },
     {
+      title: "Categoria_id",
+      field: "categoria_id",
+      formatter: "plaintext",      
+    },
+    {
       title: "Ubicacion",
       field: "ubicacion_almacen",
       formatter: "plaintext",
-      //editor: "input",
-      // cellEdited: (cell) => {
-      //   //console.log(cell._cell.row.cells[8].element.innerHTML)
-      //   cell._cell.row.cells[8].element.innerHTML =
-      //     '<i class="fas fa-edit" style="color:green"></i>';
-      // },
+      
+    },
+    {
+      title: "Ubicacion_id",
+      field: "ubicacion_id",
+      formatter: "plaintext",     
     },
     {
       title: "Editar Ubicacion",
@@ -595,6 +600,12 @@ botonGuardarCategoria.addEventListener('click', ()=>{
 
 //! Exportar a Excel
 document.getElementById("download-xlsx").addEventListener("click", function(){
+  table2.columnManager.columnsByIndex.splice(18,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(17,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(16,1)
+  table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(15,1)
   table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(14,1)
@@ -602,58 +613,33 @@ document.getElementById("download-xlsx").addEventListener("click", function(){
   table2.columnManager.columnsByIndex.splice(13,1)
   table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(12,1)
-  table2.columnManager.columns.pop()
-  table2.columnManager.columnsByIndex.splice(11,1)
-  table2.columnManager.columns.pop()
-  table2.columnManager.columnsByIndex.splice(10,1)
-  table2.columnManager.columns.pop()
-  table2.columnManager.columnsByIndex.splice(9,1)
-  table2.columnManager.columns.pop()
-  table2.columnManager.columnsByIndex.splice(8,1)
-  table2.columnManager.columns.pop()
-  // table2.columnManager.columnsByIndex.pop()
+  //table2.columnManager.columns.pop()
+  //table2.columnManager.columnsByIndex.splice(10,1)
+  //table2.columnManager.columns.pop()
+  //table2.columnManager.columnsByIndex.splice(9,1)
+  //table2.columnManager.columns.pop()
+  //table2.columnManager.columnsByIndex.splice(8,1)
   //table2.columnManager.columns.pop()
   // table2.columnManager.columnsByIndex.pop()
   //table2.columnManager.columns.pop()
   // table2.columnManager.columnsByIndex.pop()
   //table2.columnManager.columns.pop()
-  console.log(table2.getData())
-  console.log(table2.columnManager);
-  console.log(table2.columnManager.columnsByField)//object
+  // table2.columnManager.columnsByIndex.pop()
+  //table2.columnManager.columns.pop()
+  //console.log(table2.getData())
+  //console.log(table2.columnManager);
+  //console.log(table2.columnManager.columnsByField)//object
 
-  let url = "./model/exportar_productos.php"
-
-  let configFetch = {
-    method: "POST",
-    body: `datos=${JSON.stringify(table2.getData())}`,    
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  };
-
-  let promesa = fetch(url, configFetch);
-
-  //console.log(selCategorias)
-  // promesa
-  // .then(response => response.blob())
-  // .then(blob => {
-  //   // Crear un objeto URL para el blob del archivo
-  //   var url = URL.createObjectURL(blob);
-
-  //   // Crear un enlace temporal
-  //   var link = document.createElement('a');
-  //   link.href = url;
-  //   link.download = 'Productos.xlsx';
-
-  //   // Simular un clic en el enlace para iniciar la descarga
-  //   link.click();
-
-  //   // Limpiar el objeto URL
-  //   URL.revokeObjectURL(url);
-  // })
-  // .catch(error => console.error('Error al descargar el archivo:', error));
-
+  
+  
 
   //table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
   //location.reload();
+  table2.download("xlsx", "Productos.xlsx", { sheetName: "Todos los datos" });
+  
+  
 });
 
 //TODO Buscar producto
+
+
