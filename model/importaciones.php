@@ -7,10 +7,12 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 $archivo = $_FILES["archivo"]["name"];
+//$archivo = $_FILES["archivo"];
+
 
 
 if (!empty($_POST['importar-productos']) && !empty($archivo)) {
-    //importar_productos();
+    //importar_productos($archivo);
     subir_archivo($archivo, 'importar-productos');
 } elseif (!empty($_POST['importar-categorias']) && !empty($archivo)) {
     //importar_categorias();
@@ -70,7 +72,7 @@ function subir_archivo(string $archivo, string $funcion)
 
     #Nota: aquí tomamos el nombre que trae, pero recomiendo renombrarlo a otra cosa usando, por ejemplo, uniqid
     $nombreArchivo = $informacionDelArchivo["name"];
-    $nuevaUbicacion = $rutaDeSubidas . "/" . $nombreArchivo;
+    $nuevaUbicacion = $rutaDeSubidas .  $nombreArchivo;
 
     # Mover
     $resultado = move_uploaded_file($ubicacionTemporal, $nuevaUbicacion);
@@ -148,6 +150,11 @@ function importar_productos(string $archivo)
         $nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
         $documento = IOFactory::load($nombreArchivo);
 
+        //Obtener y cargar ruta y nombre del archivo a cargar
+        //$nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
+        //$documento = IOFactory::load($archivo);
+
+
         $totalHojas = $documento->getSheetCount(); //Numero de hojas
         $hojaActual = $documento->getSheet(0); //Hoja por el indice
         $numeroFilas = $hojaActual->getHighestDataRow(); //Obtener la mayor fila de datos
@@ -157,6 +164,7 @@ function importar_productos(string $archivo)
         //TODO valorar si hacer una actualizacion 
 
         for ($nFila = 2; $nFila <= $numeroFilas; $nFila++) {
+            
             $valor1  = $hojaActual->getCell([1, $nFila]);//nombre
             $valor2  = $hojaActual->getCell([2,  $nFila]);
             //echo($valor2);
@@ -167,28 +175,32 @@ function importar_productos(string $archivo)
             $valor7  = $hojaActual->getCell([7, $nFila]);
             $valor8  = $hojaActual->getCell([8, $nFila]);
             //$valor9  = $hojaActual ->getCell([9, $nFila]);
-            //$valor10 = $hojaActual->getCell([10, $nFila]);
+            $valor10 = $hojaActual->getCell([10, $nFila]);
+            $valor12 = $hojaActual->getCell([12, $nFila]);
 
             //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
-            $query = "SELECT id_producto FROM producto WHERE id_producto = $valor1";
+            $query = "SELECT id_producto FROM producto WHERE id_producto = ?";
             $stm = $GLOBALS['pdo']->prepare($query);
-            $stm ->execute();
-            //$rows += $stm->rowCount();
+            $stm ->execute([$valor1]);
+            $rows += $stm->rowCount();
 
             if($stm->rowCount() == 0){
-                $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente, codigo_barra, codigo_interno, precio_compra, precio_venta)
-                      VALUES (?,?,?,?,?,?,?)";
+                $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente, codigo_barra, codigo_interno, precio_compra, precio_venta, ubicacion, categoria_id)
+                      VALUES (?,?,?,?,?,?,?,?,?)";
                 $stm = $GLOBALS['pdo']->prepare($query);
-                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8 /*$valor9,*/]);
+                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/$valor10, $valor12]);
                 $rows += $stm->rowCount();
                                 
             }else{
+                echo($valor1 ."-" . $valor2 ."-" . $valor3 ."-" . $valor4 ."-" . $valor5 ."-" . $valor6 ."-" . $valor7 ."-" . $valor8 . "-" . $valor10 . "-" . $valor12 . "-" . "</br></br>");
                 $query = "UPDATE producto SET 
-                nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?,
-                precio_compra=?,precio_venta=?/*,ubicacion= ?*/
+                nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?, 
+                precio_compra=?,precio_venta=? , ubicacion =? ,categoria_id =?
                 WHERE id_producto = ?";
+                
                 $stm = $GLOBALS['pdo']->prepare($query);
-                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/ $valor1,]);
+                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, $valor10, $valor12, /*$valor,*/ $valor1,]);
+                echo($stm->queryString . "</br></br>");
                 $rows += $stm->rowCount();
             }
            

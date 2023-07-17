@@ -38,6 +38,7 @@ let categoria_edit = (_cell, _formatterParams, _onRendered) => {
 //! ------------------------ //
 
 // ! Tabla de resultados TABULATOR
+
 let table2 = new Tabulator("#example-table", {
   printRowRange: "all",
   pagination: "local",
@@ -125,16 +126,6 @@ let table2 = new Tabulator("#example-table", {
       },
     },
     {
-      title: "Categoria",
-      field: "nombre_categoria",
-      formatter: "plaintext",      
-    },
-    {
-      title: "Categoria_id",
-      field: "categoria_id",
-      formatter: "plaintext",      
-    },
-    {
       title: "Ubicacion",
       field: "ubicacion_almacen",
       formatter: "plaintext",
@@ -144,6 +135,16 @@ let table2 = new Tabulator("#example-table", {
       title: "Ubicacion_id",
       field: "ubicacion_id",
       formatter: "plaintext",     
+    },
+    {
+      title: "Categoria",
+      field: "nombre_categoria",
+      formatter: "plaintext",      
+    },
+    {
+      title: "Categoria_id",
+      field: "categoria_id",
+      formatter: "plaintext",      
     },
     {
       title: "Editar Ubicacion",
@@ -600,6 +601,7 @@ botonGuardarCategoria.addEventListener('click', ()=>{
 
 //! Exportar a Excel
 document.getElementById("download-xlsx").addEventListener("click", function(){
+
   table2.columnManager.columnsByIndex.splice(18,1)
   table2.columnManager.columns.pop()
   table2.columnManager.columnsByIndex.splice(17,1)
@@ -633,9 +635,9 @@ document.getElementById("download-xlsx").addEventListener("click", function(){
   
   
 
-  //table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
-  //location.reload();
-  table2.download("xlsx", "Productos.xlsx", { sheetName: "Todos los datos" });
+  table2.download("xlsx", "productos.xlsx", {sheetName:"Productos"});
+  //table2.download("xlsx", "Productos.xlsx", { sheetName: "Todos los datos" });
+  location.reload();
   
   
 });
