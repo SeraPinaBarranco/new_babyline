@@ -192,15 +192,29 @@ function importar_productos(string $archivo)
                 $rows += $stm->rowCount();
                                 
             }else{
-                echo($valor1 ."-" . $valor2 ."-" . $valor3 ."-" . $valor4 ."-" . $valor5 ."-" . $valor6 ."-" . $valor7 ."-" . $valor8 . "-" . $valor10 . "-" . $valor12 . "-" . "</br></br>");
+                echo($valor1 ." - " . $valor2 ." - " . $valor3 ." - " . $valor4 ." - " . $valor5 ." - " . $valor6 ." - " . $valor7 ." - " . $valor8 . " - " . $valor10 . " - " . $valor12 . " - " . "</br></br>");
                 $query = "UPDATE producto SET 
-                nombre=?,fabricante=?,cantidad_existente= ?, codigo_barra=?,codigo_interno=?, 
-                precio_compra=?,precio_venta=? , ubicacion =? ,categoria_id =?
+                            nombre            = ?,
+                            fabricante        = ?,
+                            cantidad_existente= ?,
+                            codigo_barra      = ?,
+                            codigo_interno    = ?, 
+                            precio_compra     = ?,
+                            precio_venta      = ? 
+                            /*ubicacion         = ?,
+                            categoria_id      = ?*/
                 WHERE id_producto = ?";
+
+               
                 
                 $stm = $GLOBALS['pdo']->prepare($query);
-                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, $valor10, $valor12, /*$valor,*/ $valor1,]);
+                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor10, $valor12, $valor,*/ $valor1,]);
                 echo($stm->queryString . "</br></br>");
+
+                $query_cat = "UPDATE producto SET ubicacion = $valor10, categoria_id= $valor12 WHERE id_producto = $valor1";
+                $stm = $GLOBALS['pdo']->prepare($query_cat);
+                $stm->execute();
+
                 $rows += $stm->rowCount();
             }
            
