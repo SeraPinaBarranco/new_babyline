@@ -3,12 +3,13 @@
 require "../vendor/autoload.php";
 include_once("./db.php");
 
-use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 $archivo = $_FILES["archivo"]["name"];
 //$archivo = $_FILES["archivo"];
 
+$msg = "";
 
 
 if (!empty($_POST['importar-productos']) && !empty($archivo)) {
@@ -23,36 +24,7 @@ if (!empty($_POST['importar-productos']) && !empty($archivo)) {
     echo "no";
 }
 
-// $nombreArchivo = "../datos/categorias.xlsx";
-// $documento = IOFactory::load($nombreArchivo);
 
-// $totalHojas = $documento->getSheetCount();
-
-// $hojaActual = $documento->getSheet(0);
-// $numeroFilas = $hojaActual->getHighestDataRow();
-
-
-// for ($nFila=2; $nFila <= $numeroFilas ; $nFila++) { 
-// //     //for ($col=1; $col <= $columns+1; $col++) { 
-//     $valor1 = $hojaActual->getCell([1 , $nFila]);
-//     $valor2 = $hojaActual->getCell([2,  $nFila]);
-//     $valor3 = $hojaActual->getCell([3,   $nFila]);
-//     if ($valor3 =="") {//si es vacio crear consulta sin id_prod
-//         $query = "INSERT INTO categoria(id, nombre_categoria) 
-//             VALUES (?, ?)";
-//         $stm = $pdo->prepare($query);
-
-//         $stm->execute([$valor1,$valor2]);
-//         echo "$valor1 - $valor2 - $valor3<br/>" ;
-//     }else{
-//         $query = "INSERT INTO categoria(id, nombre_categoria, id_prod) 
-//             VALUES (?, ?, ?)";
-//         $stm = $pdo->prepare($query);
-
-//         $stm->execute([$valor1,$valor2,$valor3]);
-//     }
-
-// }
 
 function subir_archivo(string $archivo, string $funcion)
 {
@@ -96,7 +68,7 @@ function importar_clientes(string $archivo)
         $nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
         $documento = IOFactory::load($nombreArchivo);
 
-        $totalHojas = $documento->getSheetCount(); //Numero de hojas
+        //$totalHojas = $documento->getSheetCount(); //Numero de hojas
         $hojaActual = $documento->getSheet(0); //Hoja por el indice
         $numeroFilas = $hojaActual->getHighestDataRow(); //Obtener la mayor fila de datos
 
@@ -112,24 +84,21 @@ function importar_clientes(string $archivo)
             //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
             $query = "SELECT id_tienda FROM tiendas WHERE id_tienda = $valor1";
             $stm = $GLOBALS['pdo']->prepare($query);
-            $stm ->execute();
+            $stm->execute();
 
-            if($stm->rowCount() == 0){
+            if ($stm->rowCount() == 0) {
                 $query = "INSERT INTO tiendas (nombre) VALUES (?)";
                 $stm = $GLOBALS['pdo']->prepare($query);
-    
+
                 $stm->execute([$valor2]);
                 $rows += $stm->rowCount();
-            }else{
+            } else {
                 $query = "UPDATE tiendas SET nombre=? WHERE id_tienda = ?";
                 $stm = $GLOBALS['pdo']->prepare($query);
-    
+
                 $stm->execute([$valor2, $valor1]);
                 $rows += $stm->rowCount();
             }
-
-
-
         }
 
         echo  "Registros importados con éxito!!<br/>";
@@ -145,88 +114,82 @@ function importar_clientes(string $archivo)
 //! La importación solo se realiza de los campos propios de la tabla
 function importar_productos(string $archivo)
 {
+    //VERSION Con bind param
     try {
-        //Obtener y cargar ruta y nombre del archivo a cargar
+        $pdo = $GLOBALS['pdo'];
         $nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
         $documento = IOFactory::load($nombreArchivo);
-
-        //Obtener y cargar ruta y nombre del archivo a cargar
-        //$nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
-        //$documento = IOFactory::load($archivo);
-
-
-        $totalHojas = $documento->getSheetCount(); //Numero de hojas
-        $hojaActual = $documento->getSheet(0); //Hoja por el indice
-        $numeroFilas = $hojaActual->getHighestDataRow(); //Obtener la mayor fila de datos
+        $hojaActual = $documento->getSheet(0);
+        $numeroFilas = $hojaActual->getHighestDataRow();
 
         $rows = 0;
 
-        //TODO valorar si hacer una actualizacion 
+        $insertQuery = "INSERT INTO producto (id_producto, nombre, fabricante, cantidad_existente, codigo_barra, codigo_interno, precio_compra, precio_venta)
+                        VALUES (:id_producto, :nombre, :fabricante, :cantidad_existente, :codigo_barra, :codigo_interno, :precio_compra, :precio_venta)
+                        ON DUPLICATE KEY UPDATE 
+                        nombre = VALUES(nombre),
+                        fabricante = VALUES(fabricante),
+                        cantidad_existente = VALUES(cantidad_existente),
+                        codigo_barra = VALUES(codigo_barra),
+                        codigo_interno = VALUES(codigo_interno),
+                        precio_compra = VALUES(precio_compra),
+                        precio_venta = VALUES(precio_venta)";
+
+
+
+        $pdo->beginTransaction();
+
+        $stmt = $pdo->prepare($insertQuery);
+
 
         for ($nFila = 2; $nFila <= $numeroFilas; $nFila++) {
-            
-            $valor1  = $hojaActual->getCell([1, $nFila]);//nombre
-            $valor2  = $hojaActual->getCell([2,  $nFila]);
-            //echo($valor2);
-            $valor3  = $hojaActual->getCell([3, $nFila]);
-            $valor4  = $hojaActual->getCell([4, $nFila]);
-            $valor5  = $hojaActual->getCell([5, $nFila]);
-            $valor6  = $hojaActual->getCell([6, $nFila]);
-            $valor7  = $hojaActual->getCell([7, $nFila]);
-            $valor8  = $hojaActual->getCell([8, $nFila]);
-            //$valor9  = $hojaActual ->getCell([9, $nFila]);
-            $valor10 = $hojaActual->getCell([10, $nFila]);
-            $valor12 = $hojaActual->getCell([12, $nFila]);
+            $valor1  = $hojaActual->getCell([1, $nFila])->getValue();
+            $valor2  = $hojaActual->getCell([2, $nFila])->getValue();
+            $valor3  = $hojaActual->getCell([3, $nFila])->getValue();
+            $valor4  = $hojaActual->getCell([4, $nFila])->getValue();
+            $valor5  = $hojaActual->getCell([5, $nFila])->getValue();
+            $valor6  = $hojaActual->getCell([6, $nFila])->getValue();
+            $valor7  = $hojaActual->getCell([7, $nFila])->getValue();
+            $valor8  = $hojaActual->getCell([8, $nFila])->getValue();
+            $valor10 = $hojaActual->getCell([10, $nFila])->getValue();
+            $valor12 = $hojaActual->getCell([12, $nFila])->getValue();
 
-            //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
-            $query = "SELECT id_producto FROM producto WHERE id_producto = ?";
-            $stm = $GLOBALS['pdo']->prepare($query);
-            $stm ->execute([$valor1]);
-            $rows += $stm->rowCount();
+            // Insertar o actualizar producto
+            $stmt->bindParam(':id_producto', $valor1);
+            $stmt->bindParam(':nombre', $valor2);
+            $stmt->bindParam(':fabricante', $valor3);
+            $stmt->bindParam(':cantidad_existente', $valor4);
+            $stmt->bindParam(':codigo_barra', $valor5);
+            $stmt->bindParam(':codigo_interno', $valor6);
+            $stmt->bindParam(':precio_compra', $valor7);
+            $stmt->bindParam(':precio_venta', $valor8);
+            $stmt->execute();
 
-            if($stm->rowCount() == 0){
-                $query = "INSERT INTO producto (nombre, fabricante, cantidad_existente, codigo_barra, codigo_interno, precio_compra, precio_venta, ubicacion, categoria_id)
-                      VALUES (?,?,?,?,?,?,?,?,?)";
-                $stm = $GLOBALS['pdo']->prepare($query);
-                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor9,*/$valor10, $valor12]);
-                $rows += $stm->rowCount();
-                                
-            }else{
-                echo($valor1 ." - " . $valor2 ." - " . $valor3 ." - " . $valor4 ." - " . $valor5 ." - " . $valor6 ." - " . $valor7 ." - " . $valor8 . " - " . $valor10 . " - " . $valor12 . " - " . "</br></br>");
-                $query = "UPDATE producto SET 
-                            nombre            = ?,
-                            fabricante        = ?,
-                            cantidad_existente= ?,
-                            codigo_barra      = ?,
-                            codigo_interno    = ?, 
-                            precio_compra     = ?,
-                            precio_venta      = ? 
-                            /*ubicacion         = ?,
-                            categoria_id      = ?*/
-                WHERE id_producto = ?";
 
-               
-                
-                $stm = $GLOBALS['pdo']->prepare($query);
-                $stm->execute([$valor2, $valor3, $valor4, $valor5, $valor6, $valor7, $valor8, /*$valor10, $valor12, $valor,*/ $valor1,]);
-                echo($stm->queryString . "</br></br>");
+            $ubicacionUpdateQuery = "UPDATE producto SET ubicacion = $valor10 WHERE id_producto = ?";
+            $categoriaUpdateQuery = "UPDATE producto SET categoria_id = $valor12 WHERE id_producto = ?";
+            $stmtUbicacion = $pdo->prepare($ubicacionUpdateQuery);
+            $stmtCategoria = $pdo->prepare($categoriaUpdateQuery);
 
-                $query_cat = "UPDATE producto SET ubicacion = $valor10, categoria_id= $valor12 WHERE id_producto = $valor1";
-                $stm = $GLOBALS['pdo']->prepare($query_cat);
-                $stm->execute();
+            // Actualizar ubicacion
+            $stmtUbicacion->execute([$valor1]);
 
-                $rows += $stm->rowCount();
-            }
-           
+            // Actualizar categoria_id
+            $stmtCategoria->execute([$valor1]);
 
+            $rows++;
         }
+
+        $pdo->commit();
+        echo "Registros importados: $rows";
     } catch (\Throwable $th) {
-        echo "Error al importar: $th<br/> ";
+        $pdo->rollBack();
+        echo "Error al importar: $th<br/>";
     } finally {
-        
-        echo  "Registros importados: $rows";
         $documento->disconnectWorksheets();
         unset($documento);
+        header("Location: ../buscar.php");
+        
     }
 }
 
@@ -247,36 +210,38 @@ function importar_categorias(string $archivo)
             $valor2 = $hojaActual->getCell([2,  $nFila]);
             //$valor3 = $hojaActual->getCell([3,   $nFila]);
             //if ($valor3 =="") {//si es vacio crear consulta sin id_prod
-            
-            
+
+
             //SI EL REGISTRO EXISTE, ACTUALIZA, SINO INSERTA
             $query = "SELECT id FROM categoria WHERE id = $valor1";
             $stm = $GLOBALS['pdo']->prepare($query);
-            $stm ->execute();
+            $stm->execute();
 
-            if($stm->rowCount() == 0){
+            if ($stm->rowCount() == 0) {
                 $query = "INSERT INTO categoria (nombre_categoria) VALUES (?)";
                 $stm = $GLOBALS['pdo']->prepare($query);
-    
+
                 $stm->execute([$valor2]);
                 $rows += $stm->rowCount();
-            }else{
+            } else {
 
                 $query = "UPDATE categoria SET nombre_categoria = ? WHERE id = ?";
                 $stm = $GLOBALS['pdo']->prepare($query);
-    
+
                 $stm->execute([$valor2, $valor1]);
                 $rows += $stm->rowCount();
             }
-
         }
 
         echo  "Registros importados con éxito!!<br/>";
     } catch (\Throwable $th) {
-        echo "Error al importar:<br/>" . $th ;
+        echo "Error al importar:<br/>" . $th;
     } finally {
         echo  "Registros importados: $rows";
+       
         $documento->disconnectWorksheets();
         unset($documento);
     }
 }
+
+
