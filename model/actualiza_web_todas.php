@@ -10,48 +10,54 @@ $stm = $pdo->query($query);
 
 
 $i = 0;
-while ($data = $stm->fetch(PDO::FETCH_ASSOC)) {
-    //print_r($data);
-    extract($data);
-
-    //echo "$id_base - $ip - $db - $usuario - $clave - $pais - $cojer - $tabla  </br>" ;
-    //TODO Llamar a la funcion que guarda en base de datos remota
-    conexion_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $pdo);
-}
+$data = $stm->fetchAll(PDO::FETCH_ASSOC);
+conexion_bd_remota($data);
 
 
-function conexion_bd_remota($id_base, $ip, $db, $usuario, $clave, $pais, $cojer, $tabla, $my_pdo)
+
+function conexion_bd_remota($data)
 {
     // 1 Crear conexion a base de datos remota
-    $SERVER =  $ip;
+    /*$SERVER =  $ip;
     $USER   =  $usuario;    
     $PASS   =  $clave;
     $BBDD   =  $db;
+    echo( $ip ." </br>");
+    $DNS = "mysql:host=$SERVER;dbname=$BBDD";*/
 
-    $DNS = "mysql:host=$SERVER;dbname=$BBDD";
-
-    try {
+    /*try {
         $pdo = new PDO($DNS, $USER, $PASS);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
         echo "Conexión exitosa a la base de datos.";
 
-        $estado = $pdo->getAttribute(PDO::ATTR_CONNECTION_STATUS);
+        
         //SI LA CONEXIÓN ES EXITOSA RECORRER LA TABLA DE PRODUCTOS PARA ACTUALIZAR LAS WEB
-        if ($estado === "Connected") {
-            echo "La conexión está activa.";
-        } else {
-            echo "La conexión se perdió.";
-        }
-        echo $estado;
-
+        
     } catch (PDOException  $th) {
         die("Error al conectar: " . $th->getMessage());
+    }*/
+    $indice1 = 0;
+    $longitud1 = count($data);
+
+    while ($indice1 < $longitud1) {
+        $elemento = $data[$indice1];
+        $indice2 = 0;
+        $longitud2 = count($elemento);
+
+        while ($indice2 < $longitud2) {
+            $clave = array_keys($elemento)[$indice2];
+            $valor = $elemento[$clave];
+            //print_r(array_keys($elemento)[$indice2]);
+            echo $valor;
+            echo "</br>";
+
+            $indice2++;
+        }
+        echo "</br>";
+        $indice1++;
+        //print_r($data);
     }
-
-
-
 }
-
 
 
 
