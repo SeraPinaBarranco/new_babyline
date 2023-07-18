@@ -9,6 +9,8 @@
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 
+    <!-- XLSX Scripts -->
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js" defer></script>
     
     <script type="module" src="./controller/buscar_categorias.js"></script>
     <title>Buscar clientes</title>
@@ -46,6 +48,11 @@
 
     <div class="mt-5" style="padding-left: 35%; padding-right:35% ">
         <div id="tabla"></div>
+
+        <div class="mb-5">
+            <button class="btn btn-success mt-3 mb-5" id="download-xlsx" style="background-color: var(--amarillo); border-style:none;  font-weight: 500;">Download XLSX</button>
+            
+        </div>
     </div>
 
     <?php include "./uis/footer.php"; ?>

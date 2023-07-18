@@ -154,4 +154,27 @@ let updateIcom = function (_cell, _formatterParams, _onRendered) {
       
   } 
     
+  //! Exportar a Excel
+document.getElementById("download-xlsx").addEventListener("click", function(){
+  /*
+  table2.columnManager.columnsByIndex.splice(18,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(17,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(16,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(15,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(14,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(13,1)
+  table2.columnManager.columns.pop()
+  table2.columnManager.columnsByIndex.splice(12,1)
+  */
+
+  table2.download("xlsx", "Categorias.xlsx", {sheetName:"Categorias"});
+  //table2.download("xlsx", "Productos.xlsx", { sheetName: "Todos los datos" });
+  //location.reload();
   
+  
+});
