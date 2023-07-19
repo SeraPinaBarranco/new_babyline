@@ -8,6 +8,9 @@ include_once("./db.php");
 $query = "SELECT * FROM basedatos";
 $stm = $pdo->query($query);
 
+//Traer los productos de la BD
+$query_productos  = "SELECT * from producto ";
+$stm_productos = $pdo->query($query_productos);
 
 $i = 0;
 $data = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -38,29 +41,53 @@ function conexion_bd_remota($data)
     }*/
     $indice1 = 0;
     $longitud1 = count($data);
-
+    
     while ($indice1 < $longitud1) {
         $elemento = $data[$indice1];
         $indice2 = 0;
         $longitud2 = count($elemento);
 
-        while ($indice2 < $longitud2) {
+        /*while ($indice2 < $longitud2) {
             $clave = array_keys($elemento)[$indice2];
             $valor = $elemento[$clave];
             //print_r(array_keys($elemento)[$indice2]);
+            //print_r($indice2);
             echo $valor;
             echo "</br>";
 
             $indice2++;
-        }
+        }*/
+        print_r($elemento);
         echo "</br>";
         $indice1++;
-        //print_r($data);
+        
+        recorrerProductos($elemento['ip'], $elemento['usuario'], $elemento['clave'], $elemento['db'], $elemento['tabla'], $elemento['cojer'] );
     }
 }
 
+//TODO Recorrer la tabla de productos para actualizar las webs
+function recorrerProductos($ip, $usuario, $clave, $db, $tabla, $cojer) {
+    //Conexion a la BD Remota
+    //$DNS = "mysql:host=$ip;dbname=$db";
+    //$pdo = new PDO($DNS,$usuario, $clave);
 
 
+    //TODO Si la conexión a la BD remota es correcta
+    //if($producto_pdo){
+        //TODO Recorrer la tabla de productos
+        while ($fila = $GLOBALS['stm_productos']->fetch(PDO::FETCH_ASSOC)) { 
+            //Si la conexión a la BD remota es correcta
+            
+        }
+            //TODO comprobar el campo $cojer para hacer la consulta
+            $query = "UPDATE $tabla set quantity = ? , $cojer  = ? WHERE model = ? or ean = ?";
+            echo $query;
+        //}
+        
+
+
+    
+}
 
 $web = $_POST["web"];
 
