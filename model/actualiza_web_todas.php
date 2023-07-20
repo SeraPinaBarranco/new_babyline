@@ -41,13 +41,13 @@ function conexion_bd_remota($data)
     }*/
     $indice1 = 0;
     $longitud1 = count($data);
-    
+
     while ($indice1 < $longitud1) {
         $elemento = $data[$indice1];
         $indice2 = 0;
         $longitud2 = count($elemento);
 
-        /*while ($indice2 < $longitud2) {
+        /*while ($indice2 <br $longitud2) {
             $clave = array_keys($elemento)[$indice2];
             $valor = $elemento[$clave];
             //print_r(array_keys($elemento)[$indice2]);
@@ -57,38 +57,43 @@ function conexion_bd_remota($data)
 
             $indice2++;
         }*/
-        print_r($elemento);
-        echo "</br>";
+        //print_r($elemento);
+        //echo "</br>";
         $indice1++;
-        
-        recorrerProductos($elemento['ip'], $elemento['usuario'], $elemento['clave'], $elemento['db'], $elemento['tabla'], $elemento['cojer'] );
+
+        recorrerProductos($elemento['ip'], $elemento['usuario'], $elemento['clave'], $elemento['db'], $elemento['tabla'], $elemento['cojer']);
     }
 }
 
 //TODO Recorrer la tabla de productos para actualizar las webs
-function recorrerProductos($ip, $usuario, $clave, $db, $tabla, $cojer) {
-    //Conexion a la BD Remota
-    //$DNS = "mysql:host=$ip;dbname=$db";
-    //$pdo = new PDO($DNS,$usuario, $clave);
-
-
-    //TODO Si la conexión a la BD remota es correcta
-    //if($producto_pdo){
-        //TODO Recorrer la tabla de productos
-        while ($fila = $GLOBALS['stm_productos']->fetch(PDO::FETCH_ASSOC)) { 
-            //Si la conexión a la BD remota es correcta
-            
-        }
-            //TODO comprobar el campo $cojer para hacer la consulta
-            $query = "UPDATE $tabla set quantity = ? , $cojer  = ? WHERE model = ? or ean = ?";
-            echo $query;
-        //}
+function recorrerProductos($ip, $usuario, $clave, $db, $tabla, $cojer)
+{
+    try {
+        //Conexion a la BD Remota
+        $DNS = "mysql:host=$ip;dbname=$db";
+        $pdo = new PDO($DNS, $usuario, $clave);
+    
+    
+        //TODO Si la conexión a la BD remota es correcta
+        if ($pdo) {
+            echo "Conectado a $ip</br>";
+            //TODO Recorrer la tabla de productos
+            // while ($fila = $GLOBALS['stm_productos']->fetch(PDO::FETCH_ASSOC)) {
+            //     //Si la conexión a la BD remota es correcta
+    
+    
+            //     //TODO comprobar el campo $cojer para hacer la consulta
+            //     $query = "UPDATE $tabla set quantity = ? , $cojer  = ? WHERE model = ? or ean = ?";
+            //     echo $query;
+            // }
+        } 
+    } catch (\Throwable $th) {
+        echo "No conectado a $ip</br>";
         
-
-
+       
+    }
     
 }
-
 $web = $_POST["web"];
 
 $rows = 0;
