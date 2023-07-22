@@ -3,49 +3,103 @@
 include_once("./db.php");
 //include_once("./ropadecu.php");
 
+// 1- OBTENER LOS PRODUCTOS
+//Traer los productos de la BD
+$query_productos  = "SELECT * from producto where id_producto = 1156";
+$stm_productos = $pdo->query($query_productos);
+$productos = $stm_productos->fetchAll(PDO::FETCH_ASSOC);
 
+// 2- OBTENER BASEDATOS 
 //TODO traer los datos de la tabla basedatos    
 $query = "SELECT * FROM basedatos";
 $stm = $pdo->query($query);
+$data = $stm->fetchAll(PDO::FETCH_ASSOC);//datos de la tabla basedatos
 
-//Traer los productos de la BD
-$query_productos  = "SELECT * from producto ";
-$stm_productos = $pdo->query($query_productos);
 
 $i = 0;
-$data = $stm->fetchAll(PDO::FETCH_ASSOC);
-conexion_bd_remota($data);
 
 
 
-function conexion_bd_remota($data)
+
+//TODO RECORRER LA TABLA BASEDATOS Y EN CADA ITERACION ACTUALIZAR CON LOS PRODUCTOS
+//foreach ($productos as $key => $producto) {
+    # code...
+    
+    //print_r($producto);
+
+    
+    //echo($producto[$i]['nombre']);
+    //echo  "</br>";
+  
+    //Recorrer BD Remota y en cada vuelta de un producto, actualizar
+    //foreach ($data as $key => $fila) {
+    //     //print_r($value['ip']);
+        conexion_bd_remota($productos, $data);
+
+    //}
+    
+//}
+
+
+
+
+/**
+ * PARAM $producto -> Iteracion de cada registro de productos
+ * PARAM $datos_bd -> Contiene los datos de la tabla Basedatos
+ */
+function conexion_bd_remota($data_productos, $datos_bd)
 {
-    // 1 Crear conexion a base de datos remota
-    /*$SERVER =  $ip;
-    $USER   =  $usuario;    
-    $PASS   =  $clave;
-    $BBDD   =  $db;
-    echo( $ip ." </br>");
-    $DNS = "mysql:host=$SERVER;dbname=$BBDD";*/
+    
+    //print_r($producto['id_producto']);
+    foreach ($datos_bd as $key => $fila) {
+    
+        // 1 Crear conexion a base de datos remota
+        $SERVER =  $fila['ip'];
+        $USER   =  $fila['usuario'];   
+        $PASS   =  $fila['clave'];
+        $BBDD   =  $fila['db'];
+        //echo( $ip ." </br>");
+        // print_r($nombre) ;
+        // echo(" </br>");
+        $rows= 0;
+        try {
+            //Conexion a la BD Remota
+            $DNS = "mysql:host=$SERVER;dbname=$BBDD";       
+            $pdo = new PDO($DNS, $USER, $PASS);
 
-    /*try {
-        $pdo = new PDO($DNS, $USER, $PASS);
-        
-        echo "Conexión exitosa a la base de datos.";
+            //SI LA CONEXION HA SIDO OK ACTUALIZAR TABLA
+            //TODO CAMBIAR TABLA ORIGINAL POR COPIA EN PRUEBAS
+            if ($pdo) {
+                //echo "Conectado a $SERVER</br>";
+                
+                foreach ($data_productos as $key => $producto) {
+                    //Consulta de actualizacion
+                    //echo $fila['tabla'];
+                    $cojer = $producto[$fila['cojer']];//obtener el valor de "cojer"
+                    //echo $cojer;
+                    $update = "UPDATE " .  $fila['tabla']  . "_copia oc set oc.quantity = ". $producto['cantidad_existente'] .", price = '" . $cojer ."'  where oc.model = '" . $producto['codigo_interno'] . "' or oc.ean = '". $producto['codigo_barra'] ."'";
+                    echo $update;
+                    // $res =$pdo->prepare($update);
+                    // $res->execute();
+                    //echo $producto['codigo_interno'] . " - ". $producto['codigo_barra'] ."</br>";
+                    //$rows += $res->rowCount();
 
-        
-        //SI LA CONEXIÓN ES EXITOSA RECORRER LA TABLA DE PRODUCTOS PARA ACTUALIZAR LAS WEB
-        
-    } catch (PDOException  $th) {
-        die("Error al conectar: " . $th->getMessage());
-    }*/
-    $indice1 = 0;
-    $longitud1 = count($data);
+                }
+            } 
+            //echo "</br></br>";
+        } catch (PDOException  $th) {
+            echo("Error al conectar: " . $th->getMessage() . "</br>");
+        }
+        echo $rows;
+    }
 
-    while ($indice1 < $longitud1) {
-        $elemento = $data[$indice1];
-        $indice2 = 0;
-        $longitud2 = count($elemento);
+    // $indice1 = 0;
+    // $longitud1 = count($data);
+
+    // while ($indice1 < $longitud1) {
+    //     $elemento = $data[$indice1];
+    //     $indice2 = 0;
+    //     $longitud2 = count($elemento);
 
         /*while ($indice2 <br $longitud2) {
             $clave = array_keys($elemento)[$indice2];
@@ -56,13 +110,13 @@ function conexion_bd_remota($data)
             echo "</br>";
 
             $indice2++;
-        }*/
+        }
         //print_r($elemento);
         //echo "</br>";
         $indice1++;
 
         recorrerProductos($elemento['ip'], $elemento['usuario'], $elemento['clave'], $elemento['db'], $elemento['tabla'], $elemento['cojer']);
-    }
+    }*/
 }
 
 //TODO Recorrer la tabla de productos para actualizar las webs
@@ -80,8 +134,8 @@ function recorrerProductos($ip, $usuario, $clave, $db, $tabla, $cojer)
             //TODO Recorrer la tabla de productos
             // while ($fila = $GLOBALS['stm_productos']->fetch(PDO::FETCH_ASSOC)) {
             //     //Si la conexión a la BD remota es correcta
-    
-    
+                //UPDATE oc_product_copia oc set oc.quantity = 998 where oc.model = '001037064' or oc.ean = '001037064';
+            
             //     //TODO comprobar el campo $cojer para hacer la consulta
             //     $query = "UPDATE $tabla set quantity = ? , $cojer  = ? WHERE model = ? or ean = ?";
             //     echo $query;
