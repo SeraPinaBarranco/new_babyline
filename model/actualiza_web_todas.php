@@ -5,7 +5,7 @@ include_once("./db.php");
 
 // 1- OBTENER LOS PRODUCTOS
 //Traer los productos de la BD
-$query_productos  = "SELECT * from producto where id_producto = 1156";
+$query_productos  = "SELECT * from producto ";
 $stm_productos = $pdo->query($query_productos);
 $productos = $stm_productos->fetchAll(PDO::FETCH_ASSOC);
 
@@ -13,7 +13,7 @@ $productos = $stm_productos->fetchAll(PDO::FETCH_ASSOC);
 //TODO traer los datos de la tabla basedatos    
 $query = "SELECT * FROM basedatos";
 $stm = $pdo->query($query);
-$data = $stm->fetchAll(PDO::FETCH_ASSOC);//datos de la tabla basedatos
+$data = $stm->fetchAll(PDO::FETCH_ASSOC); //datos de la tabla basedatos
 
 
 $i = 0;
@@ -23,21 +23,21 @@ $i = 0;
 
 //TODO RECORRER LA TABLA BASEDATOS Y EN CADA ITERACION ACTUALIZAR CON LOS PRODUCTOS
 //foreach ($productos as $key => $producto) {
-    # code...
-    
-    //print_r($producto);
+# code...
 
-    
-    //echo($producto[$i]['nombre']);
-    //echo  "</br>";
-  
-    //Recorrer BD Remota y en cada vuelta de un producto, actualizar
-    //foreach ($data as $key => $fila) {
-    //     //print_r($value['ip']);
-        conexion_bd_remota($productos, $data);
+//print_r($producto);
 
-    //}
-    
+
+//echo($producto[$i]['nombre']);
+//echo  "</br>";
+
+//Recorrer BD Remota y en cada vuelta de un producto, actualizar
+//foreach ($data as $key => $fila) {
+//     //print_r($value['ip']);
+conexion_bd_remota($productos, $data);
+
+//}
+
 //}
 
 
@@ -49,46 +49,50 @@ $i = 0;
  */
 function conexion_bd_remota($data_productos, $datos_bd)
 {
-    
+
     //print_r($producto['id_producto']);
     foreach ($datos_bd as $key => $fila) {
-    
+
         // 1 Crear conexion a base de datos remota
         $SERVER =  $fila['ip'];
-        $USER   =  $fila['usuario'];   
+        $USER   =  $fila['usuario'];
         $PASS   =  $fila['clave'];
         $BBDD   =  $fila['db'];
         //echo( $ip ." </br>");
         // print_r($nombre) ;
         // echo(" </br>");
-        $rows= 0;
+        $rows = 0;
         try {
             //Conexion a la BD Remota
-            $DNS = "mysql:host=$SERVER;dbname=$BBDD";       
+            $DNS = "mysql:host=$SERVER;dbname=$BBDD";
             $pdo = new PDO($DNS, $USER, $PASS);
 
             //SI LA CONEXION HA SIDO OK ACTUALIZAR TABLA
             //TODO CAMBIAR TABLA ORIGINAL POR COPIA EN PRUEBAS
             if ($pdo) {
                 //echo "Conectado a $SERVER</br>";
-                
-                foreach ($data_productos as $key => $producto) {
-                    //Consulta de actualizacion
-                    //echo $fila['tabla'];
-                    $cojer = $producto[$fila['cojer']];//obtener el valor de "cojer"
-                    //echo $cojer;
-                    $update = "UPDATE " .  $fila['tabla']  . "_copia oc set oc.quantity = ". $producto['cantidad_existente'] .", price = '" . $cojer ."'  where oc.model = '" . $producto['codigo_interno'] . "' or oc.ean = '". $producto['codigo_barra'] ."'";
-                    echo $update;
-                    // $res =$pdo->prepare($update);
-                    // $res->execute();
-                    //echo $producto['codigo_interno'] . " - ". $producto['codigo_barra'] ."</br>";
-                    //$rows += $res->rowCount();
 
+                foreach ($data_productos as $key => $producto) {
+                    //Actualizar solo ropadecu (por ahora)
+                    if ($fila['ip'] == '185.70.93.243') {
+                        $cojer = $producto[$fila['cojer']]; //obtener el valor de "cojer"
+                        //echo $cojer;
+                        //Consulta de actualizacion
+                        $update = "UPDATE oc_" .  $fila['tabla']  . "_copia oc set oc.quantity = " . $producto['cantidad_existente'] . ", price = '" . $cojer . "'  where oc.model = '" . $producto['codigo_interno'] . "' or oc.ean = '" . $producto['codigo_barra'] . "'";
+                        //echo $update;
+                         $res =$pdo->prepare($update);
+                         $res->execute();
+                        //echo $producto['codigo_interno'] . " - ". $producto['codigo_barra'] ."</br>";
+                        $updatesArray = [];
+                        if($res->rowCount() > 0) $updatesArray['codigo'] = $producto['codigo_interno'];
+                        $rows += $res->rowCount();
+                        var_dump($updatesArray);
+                    }
                 }
-            } 
+            }
             //echo "</br></br>";
         } catch (PDOException  $th) {
-            echo("Error al conectar: " . $th->getMessage() . "</br>");
+            echo ("Error al conectar: " . $th->getMessage() . "</br>");
         }
         echo $rows;
     }
@@ -101,7 +105,7 @@ function conexion_bd_remota($data_productos, $datos_bd)
     //     $indice2 = 0;
     //     $longitud2 = count($elemento);
 
-        /*while ($indice2 <br $longitud2) {
+    /*while ($indice2 <br $longitud2) {
             $clave = array_keys($elemento)[$indice2];
             $valor = $elemento[$clave];
             //print_r(array_keys($elemento)[$indice2]);
@@ -126,27 +130,24 @@ function recorrerProductos($ip, $usuario, $clave, $db, $tabla, $cojer)
         //Conexion a la BD Remota
         $DNS = "mysql:host=$ip;dbname=$db";
         $pdo = new PDO($DNS, $usuario, $clave);
-    
-    
+
+
         //TODO Si la conexión a la BD remota es correcta
         if ($pdo) {
             echo "Conectado a $ip</br>";
             //TODO Recorrer la tabla de productos
             // while ($fila = $GLOBALS['stm_productos']->fetch(PDO::FETCH_ASSOC)) {
             //     //Si la conexión a la BD remota es correcta
-                //UPDATE oc_product_copia oc set oc.quantity = 998 where oc.model = '001037064' or oc.ean = '001037064';
-            
+            //UPDATE oc_product_copia oc set oc.quantity = 998 where oc.model = '001037064' or oc.ean = '001037064';
+
             //     //TODO comprobar el campo $cojer para hacer la consulta
             //     $query = "UPDATE $tabla set quantity = ? , $cojer  = ? WHERE model = ? or ean = ?";
             //     echo $query;
             // }
-        } 
+        }
     } catch (\Throwable $th) {
         echo "No conectado a $ip</br>";
-        
-       
     }
-    
 }
 $web = $_POST["web"];
 

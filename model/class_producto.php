@@ -69,8 +69,8 @@ class producto extends PDO
                         fabricante=         ?,
                         cantidad_existente= ?,
                         precio_compra=      ?,
-                        precio_venta=       ?,
-                        ubicacion=          ? 
+                        precio_venta=       ?
+                        
 
                         WHERE id_producto = ?";
 
@@ -85,7 +85,7 @@ class producto extends PDO
              intval($a[5]),
              $a[6],
              $a[7],
-             empty($a[8]) ? 9 : $a[8],
+             //empty($a[8]) ? 9 : $a[8],
              //empty($a) ? intval($a[8]) : 1,
              $a[0],
         ]);
