@@ -122,18 +122,19 @@ footer{
   bottom: 0;
 }
 
-a {
+.uri {
   text-decoration: none;
   transition: font-size .2s;
+  color: white;
 }
 
-a:visited {
+.uri:visited {
   text-decoration: none;
   color: white;
   font-weight: bold;
 }
 
-a:hover{
+.uri:hover{
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.661);
   

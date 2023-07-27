@@ -28,18 +28,21 @@ if($res == 1){
         $usuario = $data[$key]['usuario'];
         $clave   = $data[$key]['clave'];
         $tabla   = $data[$key]['tabla'];
+        $coger   = $data[$key]['cojer'];
     
         
         //$DNS = "mysql:host=$ip;dbname=$db";
         //$pdo_bd = new PDO($DNS,$usuario, $clave);
     
-        grabarRemota($ip, $db, $usuario, $clave, $tabla);
+        grabarRemota($ip, $db, $usuario, $clave, $tabla, $coger);
         
     }
     
 }
 
-function grabarRemota($ip, $db, $usuario, $clave, $tabla) {
+function grabarRemota($ip, $db, $usuario, $clave, $tabla, $coger) {
+    
+
 
     //CONEXION A LA BASE DE DATOS REMOTA
     try {
@@ -52,13 +55,13 @@ function grabarRemota($ip, $db, $usuario, $clave, $tabla) {
 
         // Aquí puedes realizar las operaciones adicionales que necesites
         //ACTUALIZAR EN LA BASE DE DATOS REMOTA
-        $query = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE model = ? ";
+        $query = "UPDATE" . $tabla . "_copia set  quantity = ? , " . $coger .  " = ? WHERE model = ? ";
         $stm = $bd->prepare($query);          
             
         $stm->execute([$datos[5], $datos[7], $datos[2]]);
     
         if($stm->rowCount() == 0){
-            $query = "UPDATE oc_product_copia set  quantity = ? , price = ? WHERE ean = ? ";
+            $query = "UPDATE" . $tabla . "_copia set  quantity = ? , " . $coger .  " = ? WHERE ean = ? ";
             $stm = $bd->prepare($query);          
                 
             $stm->execute([$datos[5], $datos[7], $datos[1]]);

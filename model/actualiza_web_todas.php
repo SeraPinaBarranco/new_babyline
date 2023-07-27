@@ -10,7 +10,7 @@ $stm_productos = $pdo->query($query_productos);
 $productos = $stm_productos->fetchAll(PDO::FETCH_ASSOC);
 
 // 2- OBTENER BASEDATOS 
-//TODO traer los datos de la tabla basedatos    
+//Traer los datos de la tabla basedatos    
 $query = "SELECT * FROM basedatos";
 $stm = $pdo->query($query);
 $data = $stm->fetchAll(PDO::FETCH_ASSOC); //datos de la tabla basedatos
@@ -49,7 +49,7 @@ conexion_bd_remota($productos, $data);
  */
 function conexion_bd_remota($data_productos, $datos_bd)
 {
-
+    //Recorrer BD Remota y en cada vuelta de un producto, actualizar
     //print_r($producto['id_producto']);
     foreach ($datos_bd as $key => $fila) {
 
@@ -74,11 +74,11 @@ function conexion_bd_remota($data_productos, $datos_bd)
 
                 foreach ($data_productos as $key => $producto) {
                     //Actualizar solo ropadecu (por ahora)
-                    if ($fila['ip'] == '185.70.93.243') {
+                    //if ($fila['ip'] == '185.70.93.243') {
                         $cojer = $producto[$fila['cojer']]; //obtener el valor de "cojer"
                         //echo $cojer;
                         //Consulta de actualizacion
-                        $update = "UPDATE oc_" .  $fila['tabla']  . "_copia oc set oc.quantity = " . $producto['cantidad_existente'] . ", price = '" . $cojer . "'  where oc.model = '" . $producto['codigo_interno'] . "' or oc.ean = '" . $producto['codigo_barra'] . "'";
+                        $update = "UPDATE " .  $fila['tabla']  . "_copia oc set oc.quantity = " . $producto['cantidad_existente'] . ", price = '" . $cojer . "'  where oc.model = '" . $producto['codigo_interno'] . "' or oc.ean = '" . $producto['codigo_barra'] . "'";
                         //echo $update;
                          $res =$pdo->prepare($update);
                          $res->execute();
@@ -87,7 +87,7 @@ function conexion_bd_remota($data_productos, $datos_bd)
                         if($res->rowCount() > 0) $updatesArray['codigo'] = $producto['codigo_interno'];
                         $rows += $res->rowCount();
                         var_dump($updatesArray);
-                    }
+                    //}
                 }
             }
             //echo "</br></br>";

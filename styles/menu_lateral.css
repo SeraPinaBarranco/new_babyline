@@ -14,15 +14,7 @@
     z-index: 1;
   }
 
-  ul {
-    list-style: none;
-    color: #fff
-  }
-
-  a {
-    text-decoration: none;
-  }
-
+  
   #menu-hamburguesa {
     display: none;
     background-color: #222d32;
@@ -76,6 +68,17 @@
     border-top: 1px solid #d2d6de;
     font-size: small;
   }
+
+  
+  ul {
+    list-style: none;
+    color: #fff
+  }
+
+  a {
+    text-decoration: none;    
+  }
+
 
   .iconos{
     width:24px;
