@@ -164,7 +164,7 @@ function importar_productos(string $archivo)
             $stmt->bindParam(':precio_compra', $valor7);
             $stmt->bindParam(':precio_venta', $valor8);
             $stmt->execute();
-
+            //$stmt->debugDumpParams();
 
             $ubicacionUpdateQuery = "UPDATE producto SET ubicacion = $valor10 WHERE id_producto = ?";
             $categoriaUpdateQuery = "UPDATE producto SET categoria_id = $valor12 WHERE id_producto = ?";
@@ -188,7 +188,7 @@ function importar_productos(string $archivo)
     } finally {
         $documento->disconnectWorksheets();
         unset($documento);
-        header("Location: ../buscar.php");
+        //header("Location: ../buscar.php");
         
     }
 }
