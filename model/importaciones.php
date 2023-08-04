@@ -54,7 +54,7 @@ function subir_archivo(string $archivo, string $funcion)
         importar_categorias($archivo);
     }
     if ($resultado === true && $funcion == 'importar-productos') {
-        importar_productos($archivo);
+        importar_productos2($archivo);
     }
     if ($resultado === true && $funcion == 'importar-clientes') {
         importar_clientes($archivo);
@@ -245,3 +245,67 @@ function importar_categorias(string $archivo)
 }
 
 
+function importar_productos2(string $archivo)
+{
+    //VERSION Con bind param
+    try {
+        $pdo = $GLOBALS['pdo'];
+        $nombreArchivo = $_SERVER['DOCUMENT_ROOT'] . "/new_babyline/subidas/" . $archivo;
+        $documento = IOFactory::load($nombreArchivo);
+        $hojaActual = $documento->getSheet(0);
+        $numeroFilas = $hojaActual->getHighestDataRow();
+
+        $rows = 0;
+
+       
+
+        
+        
+        for ($nFila = 2; $nFila <= $numeroFilas; $nFila++) {
+            $valor1  = $hojaActual->getCell([1, $nFila])->getValue();
+            $valor2  = $hojaActual->getCell([2, $nFila])->getValue();
+            $valor3  = $hojaActual->getCell([3, $nFila])->getValue();
+            $valor4  = $hojaActual->getCell([4, $nFila])->getValue();
+            $valor5  = $hojaActual->getCell([5, $nFila])->getValue();
+            $valor6  = $hojaActual->getCell([6, $nFila])->getValue();
+            $valor7  = $hojaActual->getCell([7, $nFila])->getValue();
+            $valor8  = $hojaActual->getCell([8, $nFila])->getValue();
+            $valor10 = $hojaActual->getCell([10, $nFila])->getValue();
+            $valor12 = $hojaActual->getCell([12, $nFila])->getValue();
+            
+            // Insertar o actualizar producto
+            $insertQuery = "UPDATE producto SET 
+                            nombre = '$valor2', 
+                            fabricante = '$valor3', 
+                            cantidad_existente = $valor4, 
+                            codigo_barra = '$valor5', 
+                            codigo_interno = '$valor6', 
+                            precio_compra = '$valor7', 
+                            precio_venta = '$valor8', 
+                            ubicacion = $valor10, 
+                            categoria_id = $valor12 
+                            WHERE id_producto = $valor1";
+
+            echo $insertQuery . "<br/>";
+            $stmt = $pdo->prepare($insertQuery);
+
+           
+            $stmt->execute();
+            
+          
+            
+            $rows += $stmt->rowCount();
+        }
+
+        //$pdo->commit();
+        echo "Registros importados: $rows";
+    } catch (\Throwable $th) {
+        //$pdo->rollBack();
+        echo "Error al importar: $th<br/>";
+    } finally {
+        $documento->disconnectWorksheets();
+        unset($documento);
+        //header("Location: ../buscar.php");
+        
+    }
+}
