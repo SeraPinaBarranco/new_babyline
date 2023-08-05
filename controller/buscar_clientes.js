@@ -37,7 +37,7 @@ let table2 = new Tabulator("#tabla", {
       editor: "input",
       cellEdited: (cell) => {
         //console.log(cell._cell.row.cells[8].element.innerHTML)
-        cell._cell.row.cells[1].element.innerHTML =
+        cell._cell.row.cells[2].element.innerHTML =
         '<i class="fas fa-edit" style="color:green"></i>';
       },
     },

@@ -12,8 +12,7 @@
     <?php  include_once "./uis/header.php"; ?>
 
     <?php include "./uis/menu-lateral.php" ?>
-
-
+  
     <div class="content-wrapper" style="min-height: 572.2px;">
         <!-- Content Header (Page header) -->
         <!--<section class="content-header">
@@ -32,8 +31,9 @@
 
         </section>
         <!-- /.content -->
-    </div>
 
+     
+    </div>
     <?php include "./uis/footer.php"; ?>
 
 </body>
